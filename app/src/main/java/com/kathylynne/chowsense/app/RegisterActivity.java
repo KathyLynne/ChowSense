@@ -23,14 +23,10 @@ public class RegisterActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //TODO verify whether these keys are appropriate to deploy  (there are multiple keys offered by the framework)
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
 
-
-
-
-
-
-    }
+}
 
 
     @Override
@@ -58,6 +54,7 @@ public class RegisterActivity extends ActionBarActivity{
     public void buttonClick(View v){
         Button registerButton = (Button)findViewById(R.id.registerButton);
         Button cancelButton = (Button)findViewById(R.id.cancelButton);
+        //TODO refactor the user variables to page specific types, and add the confirm pass word
         String name = ((EditText)findViewById(R.id.nameText)).getText().toString();
         String email = ((EditText)findViewById(R.id.emailText)).getText().toString();
         String password = ((EditText)findViewById(R.id.passwordText)).getText().toString();
