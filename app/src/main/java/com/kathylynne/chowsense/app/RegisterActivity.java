@@ -63,7 +63,7 @@ public class RegisterActivity extends ActionBarActivity{
         if(v == registerButton) {
 
 
-            //to be removed, used for testing
+            //TOdo  remove this, - just used for testing used for testing. -Kate
             TextView test = (TextView)findViewById(R.id.textView);
 
             user.setUsername(name);
