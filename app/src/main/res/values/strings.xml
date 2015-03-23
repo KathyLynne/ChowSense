@@ -10,4 +10,12 @@
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
     <string name="login">Login</string>
+    <string name="title_activity_add_recipe">AddRecipeActivity</string>
+    <string name="btnRemove">Remove</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnDisplay">Display</string>
+    <string name="addIngredientText">Add your ingredients:</string>
+    <string name="saveButton">Save The Flavour!</string>
+    <string name="titleText">Recipe Title:</string>
+    <string name="descriptionText">Description:</string>
 </resources>

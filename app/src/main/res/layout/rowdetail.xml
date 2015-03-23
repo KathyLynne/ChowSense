@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/rowdetail"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+    <EditText
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/qtyText"/>
+    <Spinner
+            android:layout_width="32dp"
+            android:layout_height="39dp"
+            android:id="@+id/spinner" android:layout_weight="0.15"/>
+    <EditText android:id="@+id/editDescricao"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="0.43"
+              android:ems="10"
+              android:inputType="text">
+        <requestFocus/>
+    </EditText>
+    <ImageButton android:id="@+id/btnRemove"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:contentDescription="@string/btnRemove"
+                 android:src="@android:drawable/ic_delete"/>
+</LinearLayout>
