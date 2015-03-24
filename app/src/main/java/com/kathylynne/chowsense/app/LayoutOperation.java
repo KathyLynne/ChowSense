@@ -20,15 +20,15 @@ public class LayoutOperation {
 
             @Override
             public void onClick(View v) {
-                LinearLayout scrollViewlinerLayout = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
+                LinearLayout scrollViewLinearLayout = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
                 java.util.ArrayList<String> msg = new ArrayList<String>();
 
-                for (int i = 0; i < scrollViewlinerLayout.getChildCount(); i++) {
+                for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
                     // Ingredient flavour = new Ingredient();
-                    LinearLayout innerLayout = (LinearLayout) scrollViewlinerLayout.getChildAt(i);
+                    LinearLayout innerLayout = (LinearLayout) scrollViewLinearLayout.getChildAt(i);
                     EditText edit = (EditText) innerLayout.findViewById(R.id.editDescricao);
                     //EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
-                    //Spinner info as above soon
+                    //Spinner spinner = (Spinner) innerLayout.findViewById(R.id.spinner);
                     //TODO try to isolate dynamic field IDs with the following line...
                     // flavour.setMeasure(qty.getText().toString());
                     // flavour.setIngredientName(edit.getText().toString());
