@@ -82,4 +82,8 @@ public class Recipe extends ParseObject {
     public void setPhotoFile(ParseFile file) {
         put("photo", file);
     }
+
+    public String getObjectId(String id) {
+        return getObjectId();
+    }
 }

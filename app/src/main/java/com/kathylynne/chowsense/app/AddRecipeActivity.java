@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,9 @@ public class AddRecipeActivity extends ActionBarActivity {
     Button btnDisplay;
     EditText title;
     EditText description;
-    ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    ArrayList<String> ingredientIds = new ArrayList<String>();
     ArrayList<String> steps = new ArrayList<String>();
+    String recipeId;
 
 
     @Override
@@ -62,17 +62,20 @@ public class AddRecipeActivity extends ActionBarActivity {
     }
 
     public void saveRecipe(View v) {
-        JSONArray newIngredients = new JSONArray();
-        newIngredients.put(ingredients);
+        //JSONArray newIngredients = new JSONArray();
+        //newIngredients.put(ingredientIds);
 
         Recipe recipe = new Recipe();
+        recipe.saveInBackground();
+        recipeId = recipe.getObjectId();
+
         recipe.setTitle(title.getText().toString());
         recipe.setDescription(description.getText().toString());
 
 
     }
 
-    public void addIngredientToList(Ingredient ingredient) {
-        ingredients.add(ingredient);
+    public void addIngredientToList(String ingredientId) {
+        ingredientIds.add(ingredientId);
     }
 }

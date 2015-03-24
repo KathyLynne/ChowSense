@@ -22,7 +22,7 @@ public class LayoutOperation {
             public void onClick(View v) {
                 LinearLayout scrollViewlinerLayout = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
                 java.util.ArrayList<String> msg = new ArrayList<String>();
-                //ArrayList<Ingredient> tastes = new ArrayList<Ingredient>();
+
                 for (int i = 0; i < scrollViewlinerLayout.getChildCount(); i++) {
                     // Ingredient flavour = new Ingredient();
                     LinearLayout innerLayout = (LinearLayout) scrollViewlinerLayout.getChildAt(i);
