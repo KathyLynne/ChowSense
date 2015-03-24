@@ -29,7 +29,6 @@ public class LayoutOperation {
                     EditText edit = (EditText) innerLayout.findViewById(R.id.editDescricao);
                     //EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
                     //Spinner spinner = (Spinner) innerLayout.findViewById(R.id.spinner);
-
                     //TODO try to isolate dynamic field IDs with the following line...
                     // flavour.setMeasure(qty.getText().toString());
                     // flavour.setIngredientName(edit.getText().toString());
