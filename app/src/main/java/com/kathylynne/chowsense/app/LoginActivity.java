@@ -6,15 +6,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.facebook.Session;
-
+//import com.facebook.Session;
+//the above import will be used to connect to Facebook at a later date.
 /**
  * Created by Kate on 2015-03-16.
  */
@@ -24,7 +23,7 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
-        Button login = (Button)findViewById(R.id.loginButton);
+
     }
 
 
@@ -49,7 +48,7 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    //method to allow the login click to ba actionable.  Referenced in the xml.
     public void loginClick(View v){
 
         String name = ((EditText)findViewById(R.id.userName)).getText().toString();
@@ -65,6 +64,7 @@ public class LoginActivity extends ActionBarActivity {
                     Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Signup failed. Look at the ParseException to see what happened.
+                    //This is presently working, should only present errors relevant to the user (ie wrong password)
                     Context context = getApplicationContext();
                     Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                 }
