@@ -72,7 +72,7 @@ public class AddRecipeActivity extends ActionBarActivity {
         recipe.setTitle(title.getText().toString());
         recipe.setDescription(description.getText().toString());
 
-
+        //they see me changing!
     }
 
     public void addIngredientToList(String ingredientId) {
