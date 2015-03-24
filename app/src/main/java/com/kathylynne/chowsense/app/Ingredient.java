@@ -27,6 +27,7 @@ public class Ingredient extends ParseObject {
         return getString("measure");
     }
 
+
     public void setIngredientName(String name) {
         put("ingredientName", name);
     }
