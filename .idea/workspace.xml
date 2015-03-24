@@ -139,12 +139,12 @@
       <file leaf-file-name="LayoutOperation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kathylynne/chowsense/app/LayoutOperation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30807248" vertical-offset="323" max-vertical-offset="1105">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.44810542" vertical-offset="255" max-vertical-offset="1122">
+              <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#442#1933#0" expanded="true" />
-                <element signature="e#1932#1933#0" expanded="true" />
+                <element signature="e#442#1954#0" expanded="true" />
+                <element signature="e#1953#1954#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1571,7 +1571,7 @@
       <workItem from="1426508669301" duration="12264000" />
       <workItem from="1426860922418" duration="1097000" />
       <workItem from="1427140362102" duration="13958000" />
-      <workItem from="1427198222120" duration="3574000" />
+      <workItem from="1427198222120" duration="4205000" />
     </task>
     <task id="LOCAL-00001" summary="Added:  AddRecipeActivity, Ingredient, Recipe, LayoutOperation, some details to MainActivity, Strings">
       <created>1427154864971</created>
@@ -1609,11 +1609,17 @@
       <option name="project" value="LOCAL" />
       <updated>1427201786642</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="test">
+      <created>1427203228397</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1427203228397</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41878000" />
+    <option name="totallyTimeSpent" value="42509000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1737,8 +1743,8 @@
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#442#1933#0" expanded="true" />
-            <element signature="e#1932#1933#0" expanded="true" />
+            <element signature="e#442#1954#0" expanded="true" />
+            <element signature="e#1953#1954#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2191,12 +2197,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kathylynne/chowsense/app/LayoutOperation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30807248" vertical-offset="323" max-vertical-offset="1105">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.44810542" vertical-offset="255" max-vertical-offset="1122">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#442#1933#0" expanded="true" />
-            <element signature="e#1932#1933#0" expanded="true" />
+            <element signature="e#442#1954#0" expanded="true" />
+            <element signature="e#1953#1954#0" expanded="true" />
           </folding>
         </state>
       </provider>
