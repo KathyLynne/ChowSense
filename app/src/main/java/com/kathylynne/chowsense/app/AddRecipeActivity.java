@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,9 @@ public class AddRecipeActivity extends ActionBarActivity {
     ArrayList<String> ingredientIds = new ArrayList<String>();
     ArrayList<String> steps = new ArrayList<String>();
     String recipeId;
+    Button btnSave;
+    // Recipe recipe = new Recipe();
+    ParseObject recipe = new ParseObject("Recipe");
 
 
     @Override
@@ -28,13 +36,30 @@ public class AddRecipeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
         //initialize fields
+        //ParseObject.registerSubclass(Recipe.class);
+        Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
+
         title = (EditText) findViewById(R.id.titleText);
         description = (EditText) findViewById(R.id.descriptionText);
         //for dynamic item add
         btnAdd = (ImageButton) findViewById(R.id.btnAdd);
         btnDisplay = (Button) findViewById(R.id.btnDisplay);
+        btnSave = (Button) findViewById(R.id.saveRecipeButton);
+        //recipeId = UUID.randomUUID().toString();
+
+        //recipe.setObjectId(recipeId);
+        recipe.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                recipeId = recipe.getObjectId();
+            }
+        });
+
+        Toast rview = Toast.makeText(this, recipeId, Toast.LENGTH_SHORT);
+        rview.show();
         LayoutOperation.add(this, btnAdd);
-        LayoutOperation.display(this, btnDisplay);
+        LayoutOperation.display(this, btnDisplay, recipeId);
+        //
 
     }
 
@@ -65,12 +90,9 @@ public class AddRecipeActivity extends ActionBarActivity {
         //JSONArray newIngredients = new JSONArray();
         //newIngredients.put(ingredientIds);
 
-        Recipe recipe = new Recipe();
-        recipe.saveInBackground();
-        recipeId = recipe.getObjectId();
 
-        recipe.setTitle(title.getText().toString());
-        recipe.setDescription(description.getText().toString());
+        //recipe.setTitle(title.getText().toString());
+        //recipe.setDescription(description.getText().toString());
 
         //they see me changing!
     }

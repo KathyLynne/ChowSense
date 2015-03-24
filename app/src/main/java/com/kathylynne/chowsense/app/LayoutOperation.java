@@ -15,25 +15,27 @@ import java.util.ArrayList;
 
 public class LayoutOperation {
 
-    public static void display(final Activity activity, Button btn) {
+    public static void display(final Activity activity, Button btn, final String rID) {
         btn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 LinearLayout scrollViewLinearLayout = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
                 java.util.ArrayList<String> msg = new ArrayList<String>();
+                String recipeID = rID;
 
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
                     // Ingredient flavour = new Ingredient();
                     LinearLayout innerLayout = (LinearLayout) scrollViewLinearLayout.getChildAt(i);
-                    EditText edit = (EditText) innerLayout.findViewById(R.id.editDescricao);
-                    //EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
+                    EditText name = (EditText) innerLayout.findViewById(R.id.editDescricao);
+                    EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
                     //Spinner spinner = (Spinner) innerLayout.findViewById(R.id.spinner);
                     //TODO try to isolate dynamic field IDs with the following line...
-                    // flavour.setMeasure(qty.getText().toString());
-                    // flavour.setIngredientName(edit.getText().toString());
+                    //flavour.setMeasure(qty.getText().toString());
+                    //flavour.setIngredientName(edit.getText().toString());
                     // tastes.add(flavour);
-                    msg.add(edit.getResources().getResourceName(R.id.editDescricao));
+                    //msg.add(edit.getResources().getResourceName(R.id.editDescricao));
+                    msg.add(name.getText() + ", " + qty.getText() + ": " + recipeID);
 
 
                     //currently pops the same editDescricao id.  SO weird. So how do we get this put into the array? of ingredients to pass into JSON
@@ -55,6 +57,8 @@ public class LayoutOperation {
                 final LinearLayout newView = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.rowdetail, null);
                 newView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 ImageButton btnRemove = (ImageButton) newView.findViewById(R.id.btnRemove);
+
+                //remove ingredient here.
                 btnRemove.setOnClickListener(new View.OnClickListener() {
 
                     @Override
