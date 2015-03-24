@@ -102,8 +102,8 @@
       <file leaf-file-name="AddRecipeActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kathylynne/chowsense/app/AddRecipeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.87469286" vertical-offset="817" max-vertical-offset="1326">
-              <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.7076167" vertical-offset="817" max-vertical-offset="1326">
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="e#528#536#0" expanded="true" />
                 <element signature="e#583#591#0" expanded="true" />
@@ -1706,7 +1706,7 @@
       <workItem from="1426335236555" duration="9486000" />
       <workItem from="1426508669301" duration="12264000" />
       <workItem from="1426860922418" duration="1097000" />
-      <workItem from="1427140362102" duration="13951000" />
+      <workItem from="1427140362102" duration="13958000" />
     </task>
     <task id="LOCAL-00001" summary="Added:  AddRecipeActivity, Ingredient, Recipe, LayoutOperation, some details to MainActivity, Strings">
       <created>1427154864971</created>
@@ -1732,11 +1732,17 @@
       <option name="project" value="LOCAL" />
       <updated>1427197420908</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Modified Recipe to contain getObjectId">
+      <created>1427197428887</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1427197428887</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38297000" />
+    <option name="totallyTimeSpent" value="38304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -2297,8 +2303,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kathylynne/chowsense/app/AddRecipeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.87469286" vertical-offset="817" max-vertical-offset="1326">
-          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.7076167" vertical-offset="817" max-vertical-offset="1326">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="e#528#536#0" expanded="true" />
             <element signature="e#583#591#0" expanded="true" />
