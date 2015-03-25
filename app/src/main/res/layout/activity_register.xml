@@ -57,6 +57,11 @@
                     android:onClick="buttonClick"
                     android:id="@+id/cancelButton"
                     />
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Test Object" android:onClick="testButton"
+                    android:id="@+id/button" android:layout_gravity="center_vertical"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

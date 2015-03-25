@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 ///This class will have to be set to only run once, or possibly removed from the production version of the app
 public class MainActivity extends ActionBarActivity {
@@ -14,7 +13,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ParseObject.registerSubclass(Recipe.class);
         // TODO remember to check these keys on parse.
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
     }

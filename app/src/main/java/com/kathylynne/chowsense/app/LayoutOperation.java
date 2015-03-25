@@ -22,7 +22,6 @@ public class LayoutOperation {
             public void onClick(View v) {
                 LinearLayout scrollViewLinearLayout = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
                 java.util.ArrayList<String> msg = new ArrayList<String>();
-                String recipeID = rID;
 
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
                     // Ingredient flavour = new Ingredient();
@@ -31,18 +30,12 @@ public class LayoutOperation {
                     EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
                     //Spinner spinner = (Spinner) innerLayout.findViewById(R.id.spinner);
                     //TODO try to isolate dynamic field IDs with the following line...
-                    //flavour.setMeasure(qty.getText().toString());
-                    //flavour.setIngredientName(edit.getText().toString());
-                    // tastes.add(flavour);
                     //msg.add(edit.getResources().getResourceName(R.id.editDescricao));
-                    msg.add(name.getText() + ", " + qty.getText() + ": " + recipeID);
+                    msg.add(name.getText() + ", " + qty.getText() + ": " + rID);
 
-
-                    //currently pops the same editDescricao id.  SO weird. So how do we get this put into the array? of ingredients to pass into JSON
 
                 }
-                Toast t = Toast.makeText(activity.getApplicationContext(), msg.toString(), Toast.LENGTH_SHORT);
-                t.show();
+                Toast.makeText(activity.getApplicationContext(), msg.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -69,5 +62,9 @@ public class LayoutOperation {
                 linearLayoutForm.addView(newView);
             }
         });
+    }
+
+    //to save the ingredients, place method in here, to be called in the saveButton method in the AddRecipeActivity.
+    public static void save() {
     }
 }

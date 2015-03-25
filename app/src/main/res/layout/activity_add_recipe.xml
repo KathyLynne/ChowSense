@@ -25,6 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/titleText"
+                    android:layout_weight="1.00"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
         </LinearLayout>
@@ -41,7 +42,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:id="@+id/descriptionText" android:layout_below="@+id/titleText"
+                    android:id="@+id/descriptionText"
+                    android:layout_weight="1.00"
+                    android:layout_below="@+id/titleText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
         </LinearLayout>
@@ -80,27 +83,49 @@
                       android:orientation="vertical">
         </LinearLayout>
     </ScrollView>
-    <Button android:id="@+id/btnDisplay"
-            android:layout_width="wrap_content"
+    <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/scrollView1"
-            android:text="@string/btnDisplay"/>
+            android:id="@+id/stepContainer"
+            android:layout_below="@+id/scrollView1">
+
+        <TextView android:id="@+id/stepTextView"
+                  android:layout_width="95dp"
+                  android:layout_height="fill_parent"
+                  android:layout_alignBottom="@+id/btnAddStep"
+                  android:layout_alignParentLeft="true"
+                  android:layout_toLeftOf="@+id/btnAddStep"
+                  android:gravity="center_vertical|center_horizontal"
+                  android:text="@string/addStepsText"
+                  android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <ImageButton android:id="@+id/btnAddStep"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentRight="true"
+                     android:layout_alignParentTop="true"
+                     android:contentDescription="@string/btnAdd"
+                     android:src="@android:drawable/ic_input_add"/>
+    </RelativeLayout>
+    <ScrollView android:id="@+id/scrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stepContainer">
+        <LinearLayout android:id="@+id/stepLinearLayoutForm"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingText" android:layout_below="@+id/btnDisplay"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/saveButton"
-            android:id="@+id/saveRecipeButton" android:layout_below="@+id/ratingText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="saveRecipe"/>
+            android:id="@+id/saveRecipeButton"
+            android:onClick="saveRecipe"
+            android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

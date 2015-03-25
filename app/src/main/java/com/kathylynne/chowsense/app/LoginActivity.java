@@ -18,6 +18,10 @@ import com.parse.ParseUser;
  * Created by Kate on 2015-03-16.
  */
 public class LoginActivity extends ActionBarActivity {
+
+    String userName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +62,12 @@ public class LoginActivity extends ActionBarActivity {
         ParseUser.logInInBackground(name, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
-
+                    ParseUser userLog = user;
+                    userName = userLog.getObjectId();
                     // Hooray! The user is logged in.
                     Context context = getApplicationContext();
-                    Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context, "Hi " + userName, Toast.LENGTH_SHORT).show();
                 } else {
                     // Signup failed. Look at the ParseException to see what happened.
                     //This is presently working, should only present errors relevant to the user (ie wrong password)

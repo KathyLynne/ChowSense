@@ -10,15 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
+import com.parse.*;
 
 /**
  * Created by Kate on 2015-03-16.
  */
 public class RegisterActivity extends ActionBarActivity{
+
+    ParseUser user;
+    String userId;
+    String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,11 @@ public class RegisterActivity extends ActionBarActivity{
     public void buttonClick(View v){
         Button registerButton = (Button)findViewById(R.id.registerButton);
         Button cancelButton = (Button)findViewById(R.id.cancelButton);
-        //TODO refactor the user variables to page specific types, and add the confirm pass word
+        //TODO refactor the user variables to page specific types, and add the confirm password
         String name = ((EditText)findViewById(R.id.nameText)).getText().toString();
         String email = ((EditText)findViewById(R.id.emailText)).getText().toString();
         String password = ((EditText)findViewById(R.id.passwordText)).getText().toString();
-        ParseUser user = new ParseUser();
+        user = new ParseUser();
 
         if(v == registerButton) {
 
@@ -69,6 +71,7 @@ public class RegisterActivity extends ActionBarActivity{
             user.setUsername(name);
             user.setEmail(email);
             user.setPassword(password);
+
 
             test.setText( email +" "+ name+" "+ password);
 
@@ -91,8 +94,40 @@ public class RegisterActivity extends ActionBarActivity{
             //TODO return user to login page
 
         }
+        //user.logInInBackground(name, password);
+        //String test = user.getObjectId();
+        //Context context = getApplicationContext();
+        //Toast.makeText(context, test, Toast.LENGTH_SHORT).show();
+
 
     }
 
+    public void testButton(View v) {
+
+        //HOLY FUCK it works. But it won't work as a further nested class in the buttonClick method up there.
+        String name = ((EditText) findViewById(R.id.nameText)).getText().toString();
+
+        String password = ((EditText) findViewById(R.id.passwordText)).getText().toString();
+        ParseUser.logInInBackground(name, password, new LogInCallback() {
+            public void done(ParseUser user, ParseException e) {
+                if (user != null) {
+                    ParseUser userLog = user;
+                    userName = userLog.getUsername();
+                    // Hooray! The user is logged in.
+                    Context context = getApplicationContext();
+
+                    Toast.makeText(context, "Hi " + userName, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                    //This is presently working, should only present errors relevant to the user (ie wrong password)
+                    Context context = getApplicationContext();
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        String test = user.getObjectId();
+        Context context = getApplicationContext();
+        Toast.makeText(context, test, Toast.LENGTH_SHORT).show();
+    }
 
 }
