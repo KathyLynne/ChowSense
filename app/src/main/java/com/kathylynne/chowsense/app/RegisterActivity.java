@@ -94,6 +94,7 @@ public class RegisterActivity extends ActionBarActivity{
             //TODO return user to login page
 
         }
+
         //user.logInInBackground(name, password);
         //String test = user.getObjectId();
         //Context context = getApplicationContext();

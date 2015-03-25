@@ -96,7 +96,8 @@ public class AddRecipeActivity extends ActionBarActivity {
         //put the steps into the array
         LinearLayout stepsScrollViewLinearLayout = (LinearLayout) findViewById(R.id.stepLinearLayoutForm);
         for (int i = 0; i < stepsScrollViewLinearLayout.getChildCount(); i++) {
-            EditText stepField = (EditText) findViewById(R.id.stepText);
+            LinearLayout innerLayout = (LinearLayout) stepsScrollViewLinearLayout.getChildAt(i);
+            EditText stepField = (EditText) innerLayout.findViewById(R.id.stepText);
             String stepToSave = stepField.getText().toString();
             steps.add(stepToSave);
 
@@ -133,14 +134,15 @@ public class AddRecipeActivity extends ActionBarActivity {
             ingredient.put("Measure", iQty);
             ingredient.put("RecipeId", recipeId);
             ingredient.saveInBackground();
+
         }
 
 
-        Toast.makeText(this, "Recipe Saved!", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Recipe Saved!", Toast.LENGTH_SHORT).show();
     } // end save method
 
 
-    public void add(final Activity activity, ImageButton btn) {
+    private void add(final Activity activity, ImageButton btn) {
         //TODO find a way to turn this into ingredient fields..I believe in us~!
         final LinearLayout linearLayoutForm = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +166,7 @@ public class AddRecipeActivity extends ActionBarActivity {
         });
     }
 
-    public void addSteps(final Activity activity, ImageButton btn) {
+    private void addSteps(final Activity activity, ImageButton btn) {
         //TODO find a way to turn this into ingredient fields..I believe in us~!
         final LinearLayout stepsLinearLayoutForm = (LinearLayout) activity.findViewById(R.id.stepLinearLayoutForm);
         btn.setOnClickListener(new View.OnClickListener() {
