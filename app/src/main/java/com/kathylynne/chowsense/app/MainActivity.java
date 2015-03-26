@@ -21,11 +21,12 @@ public class MainActivity extends ActionBarActivity {
         // TODO remember to check these keys on parse.
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         ParseUser currentUser = ParseUser.getCurrentUser();
+
         if (currentUser != null) {
             //user has local session token. launch NavigationActivity  (for now set to add recipe activity)
-            Intent launchLoggedIn = new Intent(MainActivity.this, AddRecipeActivity.class);
-            launchLoggedIn.putExtra(MainActivity.USER_TOKEN, currentUser.toString());
-            startActivity(launchLoggedIn);
+            Intent launchUser = new Intent(MainActivity.this, AddRecipeActivity.class);
+            launchUser.putExtra(MainActivity.USER_TOKEN, currentUser.toString());
+            startActivity(launchUser);
 
         } else {
             Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);

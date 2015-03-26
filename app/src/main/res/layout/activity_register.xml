@@ -12,6 +12,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" android:layout_marginTop="68dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/textView"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -19,6 +25,12 @@
                     android:text="@string/name_field"
                     android:ems="10"
                     android:id="@+id/nameText" android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/textView5"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -26,6 +38,12 @@
                     android:ems="10"
                     android:text="@string/email_field"
                     android:id="@+id/emailText" android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Large Text"
+                    android:id="@+id/textView6"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -33,7 +51,19 @@
                     android:ems="10"
                     android:text="@string/password_field"
                     android:id="@+id/passwordText"/>
-        <LinearLayout
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Large Text"
+                    android:id="@+id/textView7"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/editText"/>
+            <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -45,28 +75,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/register"
                     android:id="@+id/registerButton"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="left"
                     android:onClick="buttonClick"
-                    />
+                    android:background="@drawable/bottom_bar" android:layout_marginLeft="5dp"
+                    android:layout_weight="1"/>
             <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="158dp"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
                     android:onClick="buttonClick"
                     android:id="@+id/cancelButton"
-                    />
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Test Object" android:onClick="testButton"
-                    android:id="@+id/button" android:layout_gravity="center_vertical"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="New Text"
-                    android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+                    android:background="@drawable/bottom_bar" android:layout_marginLeft="20dp"
+                    android:layout_weight="1"/>
         </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

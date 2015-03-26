@@ -22,5 +22,9 @@
     <string name="stepsDetailText">Steps:</string>
     <string name="ingredientsDetailText">Ingredients:</string>
     <string name="title_activity_recipe_detail">RecipeDetailActivity</string>
+    <string name="add_a_recipe">Add A Recipe</string>
+    <string name="search">Search</string>
+    <string name="logout">Logout</string>
+    <string name="chowsense_logo">ShowSenseLogo</string>
 
 </resources>

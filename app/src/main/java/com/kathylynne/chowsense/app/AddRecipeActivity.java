@@ -32,6 +32,7 @@ public class AddRecipeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
+
         //initialize fields
         //TODO these keys need to be verified
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
@@ -72,7 +73,7 @@ public class AddRecipeActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_recipe, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -86,6 +87,16 @@ public class AddRecipeActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_bar_search) {
+            //Intent searchIntent = new Intent(AddRecipeActivity.this)
+            return true;
+        } else if (id == R.id.action_bar_logout) {
+            ParseUser.logOut();
+            ParseUser user = ParseUser.getCurrentUser();
+            if (user == null) {
+                Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -185,6 +196,7 @@ public class AddRecipeActivity extends ActionBarActivity {
                         stepsLinearLayoutForm.removeView(newView);
                     }
                 });
+
                 stepsLinearLayoutForm.addView(newView);
             }
         });

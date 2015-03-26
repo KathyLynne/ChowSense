@@ -22,6 +22,7 @@ public class LoginActivity extends ActionBarActivity {
 
     String userName;
 
+    public static final String NAME_KEY = "Chowsense.name.key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,13 @@ public class LoginActivity extends ActionBarActivity {
 
     public void registerClick(View v) {
         Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(registerIntent);
+        if (userName == null || userName == "") {
+
+            startActivity(registerIntent);
+        } else {
+            registerIntent.putExtra(NAME_KEY, userName);
+            startActivity(registerIntent);
+        }
 
     }
 
