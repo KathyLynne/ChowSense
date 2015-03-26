@@ -1,6 +1,7 @@
 package com.kathylynne.chowsense.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -76,6 +77,12 @@ public class LoginActivity extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    public void registerClick(View v) {
+        Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(registerIntent);
+
     }
 
 
