@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:id="@+id/recipe_detail_container">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:id="@+id/recipe_header_container">
+            <LinearLayout android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/title_wrap_image_layout">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_launcher"
+                        android:id="@+id/imageView"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignLeft="@+id/recipe_detail_title"
+                        android:layout_alignStart="@+id/recipe_detail_title"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/title_wrap_title_layout">
+                <TextView android:id="@+id/recipe_detail_title"
+                          android:layout_height="wrap_content"
+                          android:layout_width="fill_parent"
+                          android:text="Recipe Name"
+                          android:textAppearance="?android:attr/textAppearanceLarge"
+                          android:layout_marginTop="30dp"
+                          android:layout_marginBottom="40dp"/>
+                <TextView android:id="@+id/recipe_detail_description"
+                          android:layout_height="wrap_content"
+                          android:layout_width="fill_parent"
+                          android:text="This is where the recipe description will go"
+                          android:textAppearance="?android:attr/textAppearanceMedium"
+                          android:layout_marginBottom="44dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:id="@+id/ingredients_title"
+                  android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:text="@string/ingredientsDetailText"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:layout_margin="20dp"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:id="@+id/details_wrap_ingredients">
+        </LinearLayout>
+        <TextView android:id="@+id/steps_title"
+                  android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:text="@string/stepsDetailText"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:layout_margin="20dp"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:id="@+id/details_wrap_steps">
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
