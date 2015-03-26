@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:text="Register Now!"
                 android:onClick="registerClick"
+
                 android:id="@+id/launchRegisterButton"/>
     </LinearLayout>
 </LinearLayout>
