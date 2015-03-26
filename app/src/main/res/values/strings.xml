@@ -19,4 +19,8 @@
     <string name="titleText">Recipe Title:</string>
     <string name="descriptionText">Description:</string>
     <string name="addStepsText">Steps to delicious meal:</string>
+    <string name="stepsDetailText">Steps:</string>
+    <string name="ingredientsDetailText">Ingredients:</string>
+    <string name="title_activity_recipe_detail">RecipeDetailActivity</string>
+
 </resources>

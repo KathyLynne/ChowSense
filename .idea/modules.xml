@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChowSense.iml" filepath="$PROJECT_DIR$/ChowSense.iml" />
       <module fileurl="file://$PROJECT_DIR$/ChowSense0323.iml" filepath="$PROJECT_DIR$/ChowSense0323.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChowSense0325.iml" filepath="$PROJECT_DIR$/ChowSense0325.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
