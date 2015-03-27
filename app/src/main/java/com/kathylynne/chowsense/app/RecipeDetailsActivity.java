@@ -7,11 +7,17 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.parse.Parse;
-import com.parse.ParseObject;
+import com.parse.*;
 
 
 public class RecipeDetailsActivity extends ActionBarActivity {
+
+
+    public String recipeTitle;
+    public TextView title;
+
+
+    //public TextView description = (TextView)findViewById(R.id.recipe_detail_description);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +25,26 @@ public class RecipeDetailsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_recipe_details);
         ParseObject.registerSubclass(Ingredient.class);
         ParseObject.registerSubclass(Recipe.class);
+
+        title = (TextView) findViewById(R.id.recipe_detail_title);
+
+
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         String recipeID = "Lf0f1fJ5WV";
-        //ParseQuery<ParseObject> query = ParseQuery.getQuery()
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
+        query.getInBackground(recipeID, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    recipeTitle = object.getString("RecipeTitle");
+                } else {
+                    //error
+                }
+            }
+        });
+
+        title.setText(recipeTitle);
+        //description.setText(recipe.getDescription().toString());
 
         final LinearLayout ingredientsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_ingredients);
         final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
