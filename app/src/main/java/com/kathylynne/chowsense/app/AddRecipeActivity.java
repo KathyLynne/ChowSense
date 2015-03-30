@@ -2,10 +2,7 @@ package com.kathylynne.chowsense.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -14,23 +11,25 @@ import com.parse.*;
 import java.util.ArrayList;
 
 
-public class AddRecipeActivity extends ActionBarActivity {
+public class AddRecipeActivity extends DrawerActivity {
 
     ImageButton btnAdd;
     ImageButton btnAddStep;
 
     EditText title;
+
     EditText description;
     ArrayList<String> steps = new ArrayList<String>();
     public String recipeId;
     Button btnSave;
+
     final ParseObject recipe = new ParseObject("Recipe");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_recipe);
+        setContentView(R.layout.fragment_add_recipe);
 
 
         //initialize fields
@@ -70,37 +69,7 @@ public class AddRecipeActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_bar_search) {
-            //Intent searchIntent = new Intent(AddRecipeActivity.this)
-            return true;
-        } else if (id == R.id.action_bar_logout) {
-            ParseUser.logOut();
-            ParseUser user = ParseUser.getCurrentUser();
-            if (user == null) {
-                Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public void saveRecipe(View v) {
 

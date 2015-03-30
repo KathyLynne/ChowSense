@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,36 +22,16 @@ public class LoginActivity extends ActionBarActivity {
 
     public static final String NAME_KEY = "Chowsense.name.key";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
-
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     //method to allow the login click to ba actionable.  Referenced in the xml.
     public void loginClick(View v){
 
@@ -68,8 +46,11 @@ public class LoginActivity extends ActionBarActivity {
                     userName = userLog.getObjectId();
                     // Hooray! The user is logged in.
                     Context context = getApplicationContext();
-
                     Toast.makeText(context, "Hi " + userName, Toast.LENGTH_SHORT).show();
+
+                    Intent navIntent = new Intent(LoginActivity.this, DrawerActivity.class);
+                    startActivity(navIntent);
+
                 } else {
                     // Signup failed. Look at the ParseException to see what happened.
                     //This is presently working, should only present errors relevant to the user (ie wrong password)

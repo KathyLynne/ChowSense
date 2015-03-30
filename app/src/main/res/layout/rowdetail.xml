@@ -3,23 +3,25 @@
               android:id="@+id/rowdetail"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:theme="@style/ToolBarTheme">
     <EditText
             android:layout_width="49dp"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/qtyText"/>
+            android:id="@+id/qtyText" android:textColor="@color/primary_material_dark"/>
     <Spinner
-            android:layout_width="32dp"
-            android:layout_height="39dp"
-            android:id="@+id/spinner" android:layout_weight="0.15"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner" android:layout_weight="0.15"
+            style="@style/Widget.AppCompat.Spinner"/>
     <EditText android:id="@+id/editDescricao"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="0.43"
               android:ems="10"
-              android:inputType="text">
+              android:inputType="text" android:textColor="@color/primary_material_dark">
         <requestFocus/>
     </EditText>
     <ImageButton android:id="@+id/btnRemove"

@@ -10,7 +10,7 @@
             android:layout_height="49dp"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/stepText" android:layout_weight="1.00"/>
+            android:id="@+id/stepText" android:layout_weight="1.00" android:textColor="#fe000000"/>
 
     <ImageButton android:id="@+id/btnRemove"
                  android:layout_width="wrap_content"

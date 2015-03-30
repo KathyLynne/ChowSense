@@ -7,7 +7,10 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.parse.*;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 
 public class RecipeDetailsActivity extends ActionBarActivity {
@@ -23,13 +26,13 @@ public class RecipeDetailsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
-        ParseObject.registerSubclass(Ingredient.class);
-        ParseObject.registerSubclass(Recipe.class);
+        //ParseObject.registerSubclass(Ingredient.class);
+        //ParseObject.registerSubclass(Recipe.class);
 
         title = (TextView) findViewById(R.id.recipe_detail_title);
 
 
-        Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
+        //Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         String recipeID = "Lf0f1fJ5WV";
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
