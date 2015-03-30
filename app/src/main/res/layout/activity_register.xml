@@ -2,93 +2,105 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:baselineAligned="false" android:background="#ff4caf50">
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_gravity="center_horizontal">
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" android:layout_marginTop="68dp">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
-                    android:id="@+id/textView"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="@string/name_field"
-                    android:ems="10"
-                    android:id="@+id/nameText" android:layout_gravity="center_horizontal"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
-                    android:id="@+id/textView5"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:text="@string/email_field"
-                    android:id="@+id/emailText" android:layout_gravity="center_horizontal"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Large Text"
-                    android:id="@+id/textView6"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:text="@string/password_field"
-                    android:id="@+id/passwordText"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Large Text"
-                    android:id="@+id/textView7"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/editText"/>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_alignParentTop="true"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp">
+        <ImageView android:layout_width="52dp"
+                   android:layout_height="75dp"
+                   android:src="@drawable/logo"
+                   android:id="@+id/imageView3"
+                   android:contentDescription="@string/chowsense_logo"
+                   android:layout_gravity="center_horizontal"
+                   android:layout_centerHorizontal="true"/>
+        <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView3"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="68dp">
-            <Button
-                    android:layout_width="wrap_content"
+                >
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/register"
-                    android:id="@+id/registerButton"
-                    android:layout_gravity="left"
-                    android:onClick="buttonClick"
-                    android:background="@drawable/bottom_bar" android:layout_marginLeft="5dp"
-                    android:layout_weight="1"/>
-            <Button
-                    android:layout_width="158dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancel"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="buttonClick"
-                    android:id="@+id/cancelButton"
-                    android:background="@drawable/bottom_bar" android:layout_marginLeft="20dp"
-                    android:layout_weight="1"/>
-        </LinearLayout>
-        </LinearLayout>
+                    android:layout_marginTop="68dp">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/name_field"
+                        android:id="@+id/registerTextViewName"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/registerNameText"
+                        android:layout_gravity="center_horizontal"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/email_field"
+                        android:id="@+id/registerTextViewEmail"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:ems="10"
+                        android:id="@+id/emailText" android:layout_gravity="center_horizontal"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/password_prompt"
+                        android:id="@+id/textView6"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/passwordText"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/password_confirm"
+                        android:id="@+id/registerTextViewConfirm"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/confirmPasswordText"/>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="68dp">
+                    <Button
+                            android:layout_width="158dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cancel"
+                            android:onClick="buttonClick"
+                            android:id="@+id/cancelButton"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.79" android:textColor="@android:color/primary_text_light"/>
+                    <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/register"
+                            android:id="@+id/registerButton"
+                            android:onClick="buttonClick"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1" android:layout_marginRight="10dp"
+                            android:textColor="@android:color/primary_text_light"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </LinearLayout>

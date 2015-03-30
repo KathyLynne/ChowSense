@@ -25,6 +25,45 @@
     <string name="add_a_recipe">Add A Recipe</string>
     <string name="search">Search</string>
     <string name="logout">Logout</string>
+    <string name="about">About</string>
     <string name="chowsense_logo">ShowSenseLogo</string>
+    <string name="recipe_icon_desc">Recipe Icon</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="password_prompt">Password: (must contain at least one Capitol letter and one number)</string>
+    <string name="password_confirm">Confirm Password:</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Search</item>
+        <item>Add Recipe</item>
+        <item>Favourites</item>
+        <item>My Recipes</item>
+        <item>About</item>
+    </string-array>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Search</item>
+        <item>Add Recipe</item>
+        <item>Favourites</item>
+        <item>My Recipes</item>
+        <item>About</item>
+        <item>Recipe Details Test</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@android:drawable/ic_menu_compass</item>
+        <item>@android:drawable/ic_menu_search</item>
+        <item>@android:drawable/ic_menu_add</item>
+        <item>@android:drawable/star_off</item>
+        <item>@android:drawable/ic_menu_view</item>
+        <item>@android:drawable/ic_menu_info_details</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
 
 </resources>

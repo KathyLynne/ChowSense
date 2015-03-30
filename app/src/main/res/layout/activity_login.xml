@@ -3,74 +3,79 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#ff33691e">
+              android:background="#ff4caf50" android:baselineAligned="false">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-
-            android:layout_height="match_parent"
-            android:padding="50dp"
-            android:layout_margin="10dp"
-            android:background="#ffffff" android:weightSum="1" android:baselineAligned="false">
-
-        <ImageView
-                android:layout_width="52dp"
-                android:layout_height="75dp"
-                android:src="@drawable/logo"
-                android:id="@+id/login_logo_imageView" android:contentDescription="@string/chowsense_logo"
-                android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/name_field"
-                android:editable="false"
-                android:id="@+id/textView3"/>
-        <EditText
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView4">
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/userName"
-                android:layout_gravity="center_horizontal"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:editable="false"
-                android:text="@string/password_field"
-                android:id="@+id/textView4"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/userPassword"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login"
-                android:onClick="loginClick"
-                android:id="@+id/loginButton" android:layout_gravity="center_horizontal"
-                style="@android:style/ButtonBar" android:padding="8dp" android:paddingTop="20dp"
-                android:background="@drawable/bottom_bar"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New to ChowSense?"
 
-                android:editable="false"
-                android:id="@+id/textView2" android:layout_gravity="center_horizontal" android:paddingTop="30dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-        <Button
-                style="@android:style/ButtonBar"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register Now!"
-                android:onClick="registerClick"
+                android:padding="50dp"
+                android:layout_margin="10dp"
+                android:weightSum="1"
+                android:baselineAligned="true">
 
-                android:id="@+id/launchRegisterButton" android:layout_gravity="center_horizontal"
-                android:background="@drawable/bottom_bar"/>
-    </LinearLayout>
+            <ImageView
+                    android:layout_width="52dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/logo"
+                    android:id="@+id/login_logo_imageView" android:contentDescription="@string/chowsense_logo"
+                    android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/name_field"
+                    android:editable="false"
+                    android:id="@+id/textView3"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/userName"
+                    android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:editable="false"
+                    android:text="@string/password_field"
+                    android:id="@+id/textView4"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/userPassword"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login"
+                    android:onClick="loginClick"
+                    android:id="@+id/loginButton" android:layout_gravity="center_horizontal"
+                    android:padding="8dp" android:paddingTop="20dp"
+                    android:textColor="@android:color/primary_text_light"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New to ChowSense?"
+
+                    android:editable="false"
+                    android:id="@+id/textView2" android:layout_gravity="center_horizontal" android:paddingTop="30dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register Now!"
+                    android:onClick="registerClick"
+
+                    android:id="@+id/launchRegisterButton" android:layout_gravity="center_horizontal"
+                    android:textColor="@android:color/primary_text_light"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
