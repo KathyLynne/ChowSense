@@ -128,12 +128,12 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     ingredient.setRecipeID(recipeId);
                     ingredient.saveInBackground();
                     ingToRecipe.add(ingredient);
-                    Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
-                    break;
+
                 }
 
                 recipe.setIngredients(ingToRecipe);
                 recipe.saveInBackground();
+                Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
