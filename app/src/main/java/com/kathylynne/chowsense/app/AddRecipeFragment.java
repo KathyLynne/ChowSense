@@ -32,8 +32,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     ArrayList<Ingredient> ingToRecipe = new ArrayList<Ingredient>();
     public String recipeId;
     Button btnSave;
+    final String tag = "tag";
 
-    Recipe recipe = new Recipe();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,22 +55,9 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         //initialize fields
 
         //Tag for logging
-        final String tag = "tag";
 
-        recipe.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    recipeId = recipe.getObjectId();
-                    //show the recipeId is not null in logCat
-                    Log.i(tag, "object id, " + recipeId);
-                } else {
-                    //didn't work
-                }
-            }
-        });
 
-        recipeId = recipe.getRecipeId();
+
         //Toast.makeText(this, recipeId, Toast.LENGTH_SHORT).show();
 
 
@@ -83,6 +70,21 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.saveRecipeButton:
+                final Recipe recipe = new Recipe();
+                recipe.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            recipeId = recipe.getObjectId();
+                            //show the recipeId is not null in logCat
+                            Log.i(tag, "object id, " + recipeId);
+                        } else {
+                            //didn't work
+                        }
+                    }
+                });
+
+                recipeId = recipe.getRecipeId();
                 //put the steps into the array
                 LinearLayout stepsScrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.stepLinearLayoutForm);
                 for (int i = 0; i < stepsScrollViewLinearLayout.getChildCount(); i++) {
@@ -126,14 +128,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     //concatenate measure put to have the measure as well.
                     ingredient.setMeasure(iQty + " " + spinnerChoice);
                     ingredient.setRecipeID(recipeId);
-                    ingredient.saveInBackground();
                     ingToRecipe.add(ingredient);
-                    Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
-                    break;
+                    ingredient.saveInBackground();
                 }
 
                 recipe.setIngredients(ingToRecipe);
                 recipe.saveInBackground();
+                Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
