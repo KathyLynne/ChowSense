@@ -17,6 +17,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearParent">
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/camera_button"
+                    android:src="@drawable/ic_action_photo"
+                    android:marginBottom="20dp"/>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
