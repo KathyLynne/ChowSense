@@ -7,17 +7,22 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.kathylynne.chowsense.app.model.Ingredient;
+import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+
 
 public class RecipeDetailsActivity extends ActionBarActivity {
 
 
-    public String recipeTitle;
     public TextView title;
+    public TextView description;
+
 
 
     //public TextView description = (TextView)findViewById(R.id.recipe_detail_description);
@@ -26,49 +31,51 @@ public class RecipeDetailsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
-        //ParseObject.registerSubclass(Ingredient.class);
-        //ParseObject.registerSubclass(Recipe.class);
 
         title = (TextView) findViewById(R.id.recipe_detail_title);
+        description = (TextView) findViewById(R.id.recipe_detail_description);
 
+        final LinearLayout ingredientsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_ingredients);
+        final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
 
-        //Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
-        String recipeID = "Lf0f1fJ5WV";
+        String recipeID = "HUCyJ0WNVZ";
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
         query.getInBackground(recipeID, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    recipeTitle = object.getString("RecipeTitle");
+                    Recipe recipe = (Recipe) object;
+                    title.setText(recipe.getTitle());
+                    description.setText(recipe.getDescription());
+                    ArrayList<String> steps = recipe.getSteps();
+                    ArrayList<Ingredient> ingredients = recipe.getIngredients();
+
+
+                    for (int x = 0; x < ingredients.size(); x++) {
+                        final LinearLayout newView = (LinearLayout) RecipeDetailsActivity.this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
+                        newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        TextView ingredientView = (TextView) newView.findViewById(R.id.detail_recipe_text);
+
+                        ingredientView.setText(ingredients.get(x).getMeasure() + " of " + ingredients.get(x).getName());
+                        ingredientsLayout.addView(newView);
+                    }
+
+
+                    for (int x = 0; x < steps.size(); x++) {
+                        final LinearLayout newView = (LinearLayout) RecipeDetailsActivity.this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
+                        newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        TextView stepsView = (TextView) newView.findViewById(R.id.detail_recipe_text);
+
+                        stepsView.setText("Step #" + (x + 1) + "\n" + steps.get(x));
+                        stepsLayout.addView(newView);
+                    }
+
+
                 } else {
                     //error
                 }
             }
         });
-
-        title.setText(recipeTitle);
-        //description.setText(recipe.getDescription().toString());
-
-        final LinearLayout ingredientsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_ingredients);
-        final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
-
-        for (int x = 0; x < 3; x++) {
-            final LinearLayout newView = (LinearLayout) this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
-            newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            TextView ingredientView = (TextView) newView.findViewById(R.id.detail_recipe_text);
-
-            ingredientView.setText("Ingredient #" + (x + 1));
-            ingredientsLayout.addView(newView);
-        }
-
-        for (int x = 0; x < 3; x++) {
-            final LinearLayout newView = (LinearLayout) this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
-            newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            TextView stepsView = (TextView) newView.findViewById(R.id.detail_recipe_text);
-
-            stepsView.setText("This is step #" + (x + 1));
-            stepsLayout.addView(newView);
-        }
 
     }
 

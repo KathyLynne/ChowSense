@@ -27,7 +27,7 @@ public class Recipe extends ParseObject {
     }
 
     public String getDescription() {
-        return getString("RecipeTitle");
+        return getString("RecipeDescription");
     }
 
     public void setDescription(String description) {
