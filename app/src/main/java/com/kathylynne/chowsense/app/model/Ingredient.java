@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 @ParseClassName("Ingredient")
 public class Ingredient extends ParseObject {
 
+    private String spinnerValue;
     public Ingredient() {
         //default
     }
@@ -30,6 +31,7 @@ public class Ingredient extends ParseObject {
     public String getRecipeID() {
         return getString("RecipeID");
     }
+
 
     public void setRecipeID(String recipeID) {
         put("RecipeId", recipeID);
