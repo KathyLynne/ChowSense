@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.kathylynne.chowsense.app.dummy.DummyContent;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.kathylynne.chowsense.app.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -165,7 +166,7 @@ public class RecipeFragment extends ListFragment {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }
     }
 

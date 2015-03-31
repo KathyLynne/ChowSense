@@ -43,11 +43,11 @@ public class Recipe extends ParseObject {
     }
 
     public ParseFile getPhoto() {
-        return getParseFile("picture");
+        return getParseFile("RecipePhoto");
     }
 
     public void setPhoto(ParseFile file) {
-        put("photo", file);
+        put("RecipePhoto", file);
     }
 
     public ArrayList<Ingredient> getIngredients() {
@@ -61,5 +61,6 @@ public class Recipe extends ParseObject {
     public void setUser() {
         put("UserId", ParseUser.getCurrentUser().getUsername());
     }
+
 
 }

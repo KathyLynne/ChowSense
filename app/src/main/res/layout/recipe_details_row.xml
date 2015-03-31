@@ -4,10 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal">
-    <TextView android:id="@+id/detail_recipe_text"
+
+<TextView android:id="@+id/detail_recipe_text"
               android:layout_height="wrap_content"
               android:layout_width="fill_parent"
               android:text="Ingredient And Quantity"
               android:textAppearance="?android:attr/textAppearanceMedium"
-              android:layout_marginBottom="44dp"/>
+              android:layout_marginBottom="44dp"
+              android:paddingRight="20dp"
+              android:paddingLeft="20dp"/>
+
 </LinearLayout>

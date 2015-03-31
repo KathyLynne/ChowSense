@@ -21,12 +21,10 @@ import java.util.ArrayList;
 public class AddRecipeFragment extends Fragment implements View.OnClickListener {
 
     private RelativeLayout layout;
-    private LinearLayout rowLayout;
     ImageButton btnAdd;
     ImageButton btnAddStep;
     Spinner spinner;
     EditText title;
-    String spinnerChoice;
     EditText description;
     ArrayList<String> steps = new ArrayList<String>();
     ArrayList<Ingredient> ingToRecipe = new ArrayList<Ingredient>();
@@ -40,10 +38,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         layout = (RelativeLayout) inflater.inflate(R.layout.fragment_add_recipe, container, false);
         title = (EditText) layout.findViewById(R.id.titleText);
         description = (EditText) layout.findViewById(R.id.descriptionText);
-        //for dynamic item add
         btnAdd = (ImageButton) layout.findViewById(R.id.btnAdd);
         btnAddStep = (ImageButton) layout.findViewById(R.id.btnAddStep);
-
         btnSave = (Button) layout.findViewById(R.id.saveRecipeButton);
         btnSave.setOnClickListener(this);
         return layout;
@@ -52,11 +48,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //initialize fields
-
-        //Tag for logging
         final String tag = "tag";
-
+        //for some reason, has to stay here.
         recipe.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -71,10 +64,6 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         });
 
         recipeId = recipe.getRecipeId();
-        //Toast.makeText(this, recipeId, Toast.LENGTH_SHORT).show();
-
-
-        //call to make the dynamic ingredient and step buttons inflate
         add(getActivity(), btnAdd);
         addSteps(getActivity(), btnAddStep);
     }
@@ -97,34 +86,22 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setSteps(steps);
                 recipe.setUser();
 
-
-/*                ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
-                // Retrieve the object by id
-                query.getInBackground(recipeId, new GetCallback<ParseObject>() {
-                    public void done(ParseObject recipe, ParseException e) {
-                        if (e == null) {
-                            // Now let's update it with some new data.
-                            recipe.put("RecipeTitle", title.getText().toString());
-                            recipe.put("RecipeDescription", description.getText().toString());
-                            recipe.put("RecipeSteps", steps);
-                            recipe.saveInBackground();
-                        }
-                    }
-                });*/
-
                 //save the ingredients that are present at the time of buttonClick
                 LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
-                    Ingredient ingredient = new Ingredient();
+                    final Ingredient ingredient = new Ingredient();
+
                     LinearLayout innerLayout = (LinearLayout) scrollViewLinearLayout.getChildAt(i);
                     EditText name = (EditText) innerLayout.findViewById(R.id.editDescricao);
                     EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
+                    Spinner measure = (Spinner) innerLayout.findViewById(R.id.spinner);
+
+                    String choice = measure.getSelectedItem().toString();
                     String iName = name.getText().toString();
-                    //add steps here
                     String iQty = qty.getText().toString();
                     ingredient.setName(iName);
                     //concatenate measure put to have the measure as well.
-                    ingredient.setMeasure(iQty + " " + spinnerChoice);
+                    ingredient.setMeasure(iQty + " " + choice);
                     ingredient.setRecipeID(recipeId);
                     ingredient.saveInBackground();
                     ingToRecipe.add(ingredient);
@@ -139,15 +116,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
 
     private void add(final Activity activity, ImageButton btn) {
-        //TODO find a way to turn this into ingredient fields..I believe in us~!
+
         final LinearLayout linearLayoutForm = (LinearLayout) activity.findViewById(R.id.linearLayoutForm);
         btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-
-                //String[] measures = getResources().getStringArray(R.array.measurement_array);
                 final LinearLayout newView = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.rowdetail, null);
                 newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 ImageButton btnRemove = (ImageButton) newView.findViewById(R.id.btnRemove);
@@ -156,18 +131,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.measurement_array, android.R.layout.simple_spinner_item);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spinnerAdapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        int option = spinner.getSelectedItemPosition();
-                        spinnerChoice = (String) parent.getItemAtPosition(option);
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
 
                 btnRemove.setOnClickListener(new View.OnClickListener() {
 
