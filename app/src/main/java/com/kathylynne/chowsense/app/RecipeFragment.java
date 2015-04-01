@@ -102,6 +102,7 @@ public class RecipeFragment extends ListFragment {
         if (userName != null) {
             adapter = new UserListQueryAdapter(getActivity());
 
+
         }
 
         mListView = (AbsListView) view.findViewById(android.R.id.list);
