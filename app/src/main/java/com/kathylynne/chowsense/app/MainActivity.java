@@ -12,9 +12,6 @@ import com.parse.ParseUser;
 ///This class will have to be set to only run once, or possibly removed from the production version of the app
 public class MainActivity extends ActionBarActivity {
 
-    public static final String USER_TOKEN = "chowsense.user.token";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +26,8 @@ public class MainActivity extends ActionBarActivity {
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         if (currentUser != null) {
-            //user has local session token. launch NavigationActivity  (for now set to add recipe activity)
+            //user has local session token. launch DrawerActivity with NavigationFragment as Default
             Intent launchUser = new Intent(MainActivity.this, DrawerActivity.class);
-            //launchUser.putExtra(MainActivity.USER_TOKEN, currentUser.toString());
             startActivity(launchUser);
             this.finish();
 

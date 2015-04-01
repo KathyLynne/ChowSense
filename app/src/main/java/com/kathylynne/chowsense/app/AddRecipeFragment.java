@@ -30,7 +30,6 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     ArrayList<Ingredient> ingToRecipe = new ArrayList<Ingredient>();
     public String recipeId;
     Button btnSave;
-    ImageButton cameraButton;
 
     Recipe recipe = new Recipe();
 
@@ -43,10 +42,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         btnAddStep = (ImageButton) layout.findViewById(R.id.btnAddStep);
         btnSave = (Button) layout.findViewById(R.id.saveRecipeButton);
         btnSave.setOnClickListener(this);
-        cameraButton = (ImageButton) layout.findViewById(R.id.camera_button);
         return layout;
-
-
     }
 
     @Override
@@ -70,7 +66,6 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         recipeId = recipe.getRecipeId();
         add(getActivity(), btnAdd);
         addSteps(getActivity(), btnAddStep);
-
     }
 
     @Override
@@ -116,32 +111,9 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setIngredients(ingToRecipe);
                 recipe.saveInBackground();
                 Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
-
-            case R.id.camera_button:
-
         }
     }
 
-/*
-static final int REQUEST_IMAGE_CAPTURE = 1;
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-
-    }
-    @Override
-     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
-        }
-    }
-
-   */
 
     private void add(final Activity activity, ImageButton btn) {
 
