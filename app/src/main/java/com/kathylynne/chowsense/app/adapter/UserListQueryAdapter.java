@@ -37,6 +37,8 @@ public class UserListQueryAdapter extends ParseQueryAdapter {
 
         super.getItemView(object, v, parent);
 
+
+        //left in for reference.
         // Add and download the image
         /*ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.icon);
         ParseFile imageFile = object.getParseFile("image");

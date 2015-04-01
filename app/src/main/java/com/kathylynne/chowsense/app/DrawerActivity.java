@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -40,6 +41,8 @@ public class DrawerActivity extends ActionBarActivity {
     private FragmentManager fragmentManager = getFragmentManager();
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+    static Bitmap photo;
+    private static final String TAG = "logging errors(On Drawer)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +173,17 @@ public class DrawerActivity extends ActionBarActivity {
             displayView(position);
         }
     }
+ /*   @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AddRecipeFragment.CAMERA_REQUEST && resultCode == RESULT_OK) {
+            photo = (Bitmap) data.getExtras().get("data");
+            if(photo.getHeight() > photo.getWidth()){
+                Matrix matrix = new Matrix();
+                matrix.postRotate(90);
+                photo = Bitmap.createBitmap(photo , 0, 0, photo .getWidth(), photo .getHeight(), matrix, true);
+            }
+        }
+    }*/
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
