@@ -95,9 +95,7 @@ public class RecipeFragment extends ListFragment {
                 ingredientSearchItems = new ArrayList<String>(getArguments().getStringArrayList(SEARCH_INGREDIENT_PARAM));
         }
     }
-
     ParseQueryAdapter adapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipelist, container, false);
