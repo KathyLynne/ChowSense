@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.kathylynne.chowsense.app.RecipeSearchFragment" android:background="#ffffffff">
+
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView5" android:clickable="false" android:background="#FFFFFFFF">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/search_prompt"
+                    android:id="@+id/searchPrompt"
+                    android:layout_marginTop="37dp" android:textColor="#fe19541c"
+                    android:layout_gravity="center_horizontal"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:id="@+id/linearLayout2" android:weightSum="1">
+                <TextView android:id="@+id/textView" android:layout_width="0dp" android:layout_height="fill_parent"
+                          android:gravity="center_vertical|center_horizontal" android:text="@string/addIngredientText"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:layout_weight="1.00"/>
+                <ImageButton android:id="@+id/addSearchTerm" android:layout_width="wrap_content"
+                             android:layout_height="wrap_content" android:contentDescription="@string/btnAdd"
+                             android:onClick="addSearchTerm" android:src="@android:drawable/ic_input_add"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/searchRowPlaceHolder">
+            </LinearLayout>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_btn_text"
+                    android:id="@+id/findRecipesButton"
+                    android:layout_marginTop="144dp" android:background="@drawable/bottom_bar"
+                    android:layout_gravity="bottom|center_horizontal"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
