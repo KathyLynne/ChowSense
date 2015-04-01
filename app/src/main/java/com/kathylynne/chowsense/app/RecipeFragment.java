@@ -2,25 +2,21 @@ package com.kathylynne.chowsense.app;
 
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AbsListView;
 import android.widget.ListView;
-import android.widget.TextView;
-import com.kathylynne.chowsense.app.model.Ingredient;
-import com.kathylynne.chowsense.app.model.Recipe;
-import com.parse.*;
+import com.kathylynne.chowsense.app.adapter.UserListQueryAdapter;
+import com.parse.ParseQueryAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
-
-//import com.kathylynne.chowsense.app.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
  * <p/>
+ * TODO implement OnFragmentInteractionListener in Drawer
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
@@ -31,64 +27,50 @@ public class RecipeFragment extends ListFragment {
     public static final String USER_PARAM = "UserName";
     public static final String FAVOURITE_PARAM = "UserFavourites";
     public static final String SEARCH_PARAM = "Search";
+    public static final String SEARCH_INGREDIENT_PARAM = "Ingredients";
     //private static final String ARG_PARAM2 = "param2";
     // TODO: Rename and change types of parameters
     private String userName;
-    private String mParam2;
+    private String favourites;
+    private String recipeTitle;
+    private ArrayList<String> ingredientSearchItems;
 
-    private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+    //private ListAdapter mAdapter;
+
+    //private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
 
     private OnFragmentInteractionListener mListener;
 
+    /**
+     * The fragment's ListView/GridView.
+     */
+    private AbsListView mListView;
 
     /**
      * Instantiation settings for the fragment, handling the passing of the bundles
      */
 
-    public static RecipeFragment newInstance(String parameter) {
+    public static RecipeFragment newInstance(String key, String parameter) {
         RecipeFragment fragment = new RecipeFragment();
         Bundle args = new Bundle();
-
-        args.putString(USER_PARAM, parameter);
-
+        args.putString(key, parameter);
 
         fragment.setArguments(args);
         return fragment;
     }
 
     //overload the newInstance method to accept the agrument for the list as well.
-    public static RecipeFragment newInstance(ArrayList<Ingredient> parameter) {
+    public static RecipeFragment newInstance(String key, ArrayList<String> parameter) {
         RecipeFragment fragment = new RecipeFragment();
         Bundle args = new Bundle();
-        //TODO
-        //could this be serializable array?  is it parcelable array?
-        //args.put(USER_PARAM, parameter);
-
-
+        args.putStringArrayList(key, parameter);
         fragment.setArguments(args);
         return fragment;
     }
 
-    /**
-     * Custom adapter
-     */
-    private class RecipeListAdapter extends ArrayAdapter<Recipe> {
-        public RecipeListAdapter(ArrayList<Recipe> recipeList) {
-            super(getActivity(), 0, recipeList);
-        }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.layout_fragment_recipe_list, null);
-            }
-            //Recipe r = getItem(position);
-            TextView titleTextView = (TextView) convertView.findViewById(R.id.recipe_list_row_title);
-            TextView descTextView = (TextView) convertView.findViewById(R.id.recipe_list_row_Description);
 
-            return convertView;
-        }
-    }
+
 
 
     /**
@@ -102,55 +84,36 @@ public class RecipeFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() == null) {
-
-            userName = getArguments().getString(USER_PARAM);
-            //get query from user name
-            ParseQuery<Recipe> myRecipeQuery = ParseQuery.getQuery(Recipe.class);
-            myRecipeQuery.whereContains("UserId", ParseUser.getCurrentUser().get("username").toString());
-            myRecipeQuery.findInBackground(new FindCallback<Recipe>() {
-                @Override
-                public void done(List<Recipe> list, ParseException e) {
-                    final String TAG = "QueryError";
-                    if (e == null) {
-                        for (Recipe r : list) {
-                            Log.d(TAG, recipeList.get(0).toString());
-                            recipeList.add(r);
-
-                            // TODO: Change Adapter to display your content
-                            //RecipeListAdapter adapter = new RecipeListAdapter(recipeList);
-                            //setListAdapter(adapter);
-                        }
-                    } else {
-
-                        Log.d(TAG, e.getMessage());
-                    }
-
-                }
-            });
-            final ParseQueryAdapter adapter = new ParseQueryAdapter(getActivity().getApplicationContext(), Recipe.class);
-
-
+        if (getArguments() != null) {
+            if (getArguments().containsKey(USER_PARAM)) {
+                userName = getArguments().getString(USER_PARAM);
+            } else if (getArguments().containsKey(FAVOURITE_PARAM)) {
+                favourites = getArguments().getString(USER_PARAM);
+            } else if (getArguments().containsKey(SEARCH_PARAM)) {
+                recipeTitle = getArguments().getString(SEARCH_PARAM);
+            } else if (getArguments().containsKey(SEARCH_INGREDIENT_PARAM))
+                ingredientSearchItems = new ArrayList<String>(getArguments().getStringArrayList(SEARCH_INGREDIENT_PARAM));
         }
-
-        // TODO: Change Adapter to display your content
-        //RecipeListAdapter adapter = new RecipeListAdapter(recipeList);
-        //setListAdapter(adapter);
-        //setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-        //        android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
     }
 
+    ParseQueryAdapter adapter;
 
-/*    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_recipelist, container, false);
+        if (userName != null) {
+            adapter = new UserListQueryAdapter(getActivity());
+
         }
-    }*/
+
+        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView.setAdapter(adapter);
+        // Set OnItemClickListener so we can be notified on item clicks
+        //mListView.setOnItemClickListener();
+
+        return view;
+    }
+
 
     @Override
     public void onDetach() {
@@ -166,7 +129,7 @@ public class RecipeFragment extends ListFragment {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }
     }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import com.parse.ParseUser;
 
 /**
  * Created by Kate on 2015-03-29.
@@ -18,7 +19,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     private RelativeLayout layout;
     private FragmentActivity frag;
-
+    private String userName = ParseUser.getCurrentUser().getUsername().toString();
 
     @Nullable
     @Override
@@ -63,6 +64,8 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             case R.id.favouriteImageButton:
                 break;
             case R.id.myImageButton:
+                fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
+                ft.replace(R.id.frame_container, fragment);
                 break;
         }
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

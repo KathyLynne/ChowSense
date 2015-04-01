@@ -28,7 +28,6 @@ import java.util.ArrayList;
  */
 public class DrawerActivity extends ActionBarActivity {
 
-    private static final int FRAG_CODE = 0;
     private ActionBar actionBar;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -39,8 +38,6 @@ public class DrawerActivity extends ActionBarActivity {
     // slide menu items from string array in values/strings.xml
     private String[] navMenuTitles;
     private FragmentManager fragmentManager = getFragmentManager();
-
-
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
@@ -48,8 +45,6 @@ public class DrawerActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-        //TODO these keys need to be verified
-        // Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         actionBar = getSupportActionBar();
         mTitle = mDrawerTitle = getTitle();
         // load slide menu items
@@ -196,7 +191,7 @@ public class DrawerActivity extends ActionBarActivity {
     }
 
     /**
-     * Diplaying fragment view for selected nav drawer list item
+     * Displaying fragment view for selected nav drawer list item
      */
     private void displayView(int position) {
 
@@ -204,7 +199,7 @@ public class DrawerActivity extends ActionBarActivity {
         //most efficient here, only called when needed
         // update the main content by replacing fragments
         Fragment fragment = null;
-        RecipeFragment rFrag = RecipeFragment.newInstance(userName);
+        //RecipeFragment rFrag = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
 
         switch (position) {
             case 0:
@@ -218,10 +213,11 @@ public class DrawerActivity extends ActionBarActivity {
                 break;
             case 3:
                 //String userName = ParseUser.getCurrentUser().get("username").toString();
-                // fragment = RecipeFragment.newInstance(userName);
+
                 break;
             case 4:
                 // fragment = new PagesFragment();
+                fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
                 break;
             case 5:
                 //fragment = new WhatsHotFragment();
@@ -247,16 +243,6 @@ public class DrawerActivity extends ActionBarActivity {
             mDrawerList.setSelection(position);
             setTitle(navMenuTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
-        } else if (rFrag != null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, rFrag).commit();
-            // update selected item and title, then close the drawer
-            mDrawerList.setItemChecked(position, true);
-            mDrawerList.setSelection(position);
-            setTitle(navMenuTitles[position]);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            //rFrag.setTargetFragment(fragmentManager.getFragment(), FRAG_CODE);
-            //rFrag.
         } else {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
