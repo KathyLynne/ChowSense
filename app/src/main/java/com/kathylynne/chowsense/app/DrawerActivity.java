@@ -219,7 +219,7 @@ public class DrawerActivity extends ActionBarActivity {
                 fragment = new NavigationFragment();
                 break;
             case 1:
-                //fragment = new AddRecipeFragment();
+                fragment = new RecipeSearchFragment();
                 break;
             case 2:
                 fragment = new AddRecipeFragment();

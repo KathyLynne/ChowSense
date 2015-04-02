@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import com.kathylynne.chowsense.app.adapter.SearchListQueryAdapter;
 import com.kathylynne.chowsense.app.adapter.UserListQueryAdapter;
 import com.parse.ParseQueryAdapter;
 
@@ -34,6 +35,7 @@ public class RecipeFragment extends ListFragment {
     private String favourites;
     private String recipeTitle;
     private ArrayList<String> ingredientSearchItems;
+    public static String[] searchTerms;
 
     //private ListAdapter mAdapter;
 
@@ -91,8 +93,11 @@ public class RecipeFragment extends ListFragment {
                 favourites = getArguments().getString(USER_PARAM);
             } else if (getArguments().containsKey(SEARCH_PARAM)) {
                 recipeTitle = getArguments().getString(SEARCH_PARAM);
-            } else if (getArguments().containsKey(SEARCH_INGREDIENT_PARAM))
+            } else if (getArguments().containsKey(SEARCH_INGREDIENT_PARAM)) {
                 ingredientSearchItems = new ArrayList<String>(getArguments().getStringArrayList(SEARCH_INGREDIENT_PARAM));
+                //searchTerms = getArguments().getStringArray(SEARCH_INGREDIENT_PARAM);
+
+            }
         }
     }
     ParseQueryAdapter adapter;
@@ -101,8 +106,8 @@ public class RecipeFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_recipelist, container, false);
         if (userName != null) {
             adapter = new UserListQueryAdapter(getActivity());
-
-
+        } else if (ingredientSearchItems != null) {
+            adapter = new SearchListQueryAdapter(getActivity());
         }
 
         mListView = (AbsListView) view.findViewById(android.R.id.list);
