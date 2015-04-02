@@ -30,6 +30,7 @@
                         android:layout_height="100dp"
                         android:id="@+id/searchImageButton"
                         android:src="@drawable/search_light"
+                        android:background="@android:color/transparent"
 
                         />
             </LinearLayout>
@@ -42,6 +43,7 @@
                         android:layout_height="100dp"
                         android:id="@+id/addImageButton"
                         android:src="@drawable/add_light"
+                        android:background="@android:color/transparent"
                         android:onClick="navClick"/>
             </LinearLayout>
             <LinearLayout
@@ -51,6 +53,7 @@
                 <ImageButton
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:background="@android:color/transparent"
                         android:id="@+id/favouriteImageButton" android:src="@drawable/favourite_light"/>
             </LinearLayout>
             <LinearLayout
@@ -60,7 +63,9 @@
                 <ImageButton
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:id="@+id/myImageButton" android:src="@drawable/like_light"/>
+                        android:id="@+id/myImageButton"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/like_light"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

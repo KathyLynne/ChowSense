@@ -62,5 +62,11 @@ public class Recipe extends ParseObject {
         put("UserId", ParseUser.getCurrentUser().getUsername());
     }
 
-
+    public boolean verifyUpload() {
+        if (getString("RecipeTitle") == null || getString("RecipeDescription") == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

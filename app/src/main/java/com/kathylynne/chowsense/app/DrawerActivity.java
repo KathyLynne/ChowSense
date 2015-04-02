@@ -3,6 +3,7 @@ package com.kathylynne.chowsense.app;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -51,6 +52,7 @@ public class DrawerActivity extends ActionBarActivity {
         mTitle = mDrawerTitle = getTitle();
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_sliderMenu);
@@ -214,14 +216,16 @@ public class DrawerActivity extends ActionBarActivity {
         Fragment fragment = null;
         //RecipeFragment rFrag = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         switch (position) {
             case 0:
                 fragment = new NavigationFragment();
                 break;
             case 1:
-                //fragment = new AddRecipeFragment();
+                fragment = new RecipeSearchFragment();
                 break;
             case 2:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 fragment = new AddRecipeFragment();
                 break;
             case 3:

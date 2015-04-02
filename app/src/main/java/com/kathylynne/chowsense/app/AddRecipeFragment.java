@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,15 +38,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     EditText title;
     EditText description;
     ArrayList<String> steps = new ArrayList<String>();
-    ArrayList<Ingredient> ingToRecipe = new ArrayList<Ingredient>();
+    // ArrayList<Ingredient> ingToRecipe = new ArrayList<Ingredient>();
     public String recipeId;
     Button btnSave;
-
     public File output;
     ImageButton cameraBtn;
     public ImageView photoView;
     public Bitmap photo;
-    public static final int TAKE_PICTURE = 1888;
     Recipe recipe = new Recipe();
 
     @Override
@@ -67,8 +66,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final String tag = "tag";
         //for some reason, has to stay here.
+
         if (recipeId == null) {
 
             recipe.saveInBackground(new SaveCallback() {
@@ -111,9 +110,30 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    private Bitmap formatImage(String filePath, int maxW, int maxH) {
+        Bitmap image;
+        try {
+            image = BitmapFactory.decodeFile(filePath);
 
-    private Bitmap decodeImage(String filePath) {
-        return BitmapFactory.decodeFile(filePath);
+            int maxWidth = maxW;
+            int maxHeight = maxH;
+
+            if (image.getHeight() > image.getWidth()) {
+                Matrix matrix = new Matrix();
+                matrix.postRotate(90);
+                image = Bitmap.createBitmap(image, 0, 0, image.getWidth(), image.getHeight(), matrix, true);
+            }
+
+            image = Bitmap.createScaledBitmap(image, maxWidth, maxHeight, true);
+
+        } catch (Exception ex) {
+            if (output.exists() || output != null) {
+                output.delete();
+            }
+            Toast.makeText(getActivity(), "Photo not taken!", Toast.LENGTH_SHORT).show();
+            image = null;
+        }
+        return image;
     }
 
     @Override
@@ -121,7 +141,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         super.onResume();
         String Tag = "help with camera:";
         if (output != null) {
-            photo = decodeImage(output.getPath());
+            photo = formatImage(output.getPath(), 1024, 600);
             Log.i(Tag, "output is not null: " + output.getPath());
         } else {
             Log.i(Tag, "output is null");
@@ -159,18 +179,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setSteps(steps);
                 recipe.setUser();
 
-                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
 
-                if (photo != null) {
-
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    photo.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-                    byte[] bitMapData = stream.toByteArray();
-
-                    ParseFile imgFile = new ParseFile(photoName, bitMapData);
-                    recipe.setPhoto(imgFile);
-                }
 
                 //save the ingredients that are present at the time of buttonClick
                 LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
@@ -190,18 +199,59 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     ingredient.setMeasure(iQty + " " + choice);
                     ingredient.setRecipeID(recipeId);
                     ingredient.saveInBackground();
-                    ingToRecipe.add(ingredient);
+                    //ingToRecipe.add(ingredient);
 
                 }
 
                 Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_LONG).show();
                 btnSave.setVisibility(View.GONE);
+
+                final String tag = "tag";
+                boolean success = false;
+
                 //recipe.saveInBackground();
-                recipe.saveInBackground(new SaveCallback() {
+
+                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
+
+                if (photo != null) {
+
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                    byte[] bitMapData = stream.toByteArray();
+
+                    ParseFile imgFile = new ParseFile(photoName, bitMapData);
+                    recipe.setPhoto(imgFile);
+                }
+
+                recipe.saveInBackground();
+                /*do {
+                    try {
+                        recipe.save();
+                        Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
+                        success = true;
+
+                    } catch (com.parse.ParseException ex) {
+                        success = false;
+                        Log.e(tag, "EXCEPTION, TRYING AGAIN..." + ex.toString());
+                    }
+                }while(!success);
+*/
+                Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
+
+
+
+               /* while(!verifyUpload(recipeId)){
+                            recipe.saveInBackground();
+                            Log.i(tag,"Looping save #" + i);
+                            i++;
+                }*/
+
+/*                recipe.saveInBackground(new SaveCallback() {
                     public void done(ParseException e) {
                 Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });                */
  /*       String userName = ParseUser.getCurrentUser().get("username").toString();
         Fragment fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
 
@@ -216,6 +266,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
         }
     }
+
 
     private void add(final Activity activity, ImageButton btn) {
 
