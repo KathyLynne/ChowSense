@@ -2,37 +2,36 @@ package com.kathylynne.chowsense.app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.*;
 
 import java.util.ArrayList;
 
 
 public class RecipeSearchFragment extends Fragment implements View.OnClickListener {
 
-    //private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
+
 
     private RelativeLayout layout;
     private String mParam1;
     private String mParam2;
     private ImageButton addIngredient;
     private Button searchButton;
-    private ArrayList<String> search;
+    public static ArrayList<String> search;
+    public static String[] searchTerms;
+
     //private OnFragmentInteractionListener mListener;
 
 
-    public static RecipeSearchFragment newInstance(String param1, String param2) {
+    public static RecipeSearchFragment newInstance(String param1, ArrayList param2) {
         RecipeSearchFragment fragment = new RecipeSearchFragment();
         Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
+        args.putStringArrayList(RecipeFragment.SEARCH_INGREDIENT_PARAM, search);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,9 +63,10 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         layout = (RelativeLayout) inflater.inflate(R.layout.fragment_recipe_search, container, false);
         addIngredient = (ImageButton) layout.findViewById(R.id.addSearchTerm);
-        addIngredient.setOnClickListener(this);
-        searchButton = (Button) layout.findViewById(R.id.findRecipesButton);
 
+        searchButton = (Button) layout.findViewById(R.id.findRecipesButton);
+        search = new ArrayList<String>();
+        searchButton.setOnClickListener(this);
         return layout;
     }
 /*
@@ -96,9 +96,33 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.searchImageButton:
+        if (v.getId() == R.id.findRecipesButton) {
+            Fragment fragment = RecipeFragment.newInstance(RecipeFragment.SEARCH_INGREDIENT_PARAM, search);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            //switch (v.getId()) {
 
+            //  case R.id.findRecipesButton:
+
+
+            LinearLayout searchLayoutForm = (LinearLayout) layout.findViewById(R.id.searchRowPlaceHolder);
+            //searchTerms = new  String[searchLayoutForm.getChildCount() -1];
+            for (int i = 0; i < searchLayoutForm.getChildCount(); i++) {
+                LinearLayout innerLayout = (LinearLayout) searchLayoutForm.getChildAt(i);
+                EditText stepField = (EditText) innerLayout.findViewById(R.id.searchIngredient);
+                String stepToSave = stepField.getText().toString().trim();
+                search.add(stepToSave);
+                //searchTerms[i] = stepToSave;
+
+            }
+            // break;
+
+
+            //case R.id.findRecipesButton:
+
+
+            //}
+            ft.replace(R.id.frame_container, fragment);
+            ft.commit();
         }
     }
 
@@ -126,7 +150,6 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
                 final LinearLayout newView = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.search_row, null);
                 newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 ImageButton btnRemove = (ImageButton) newView.findViewById(R.id.searchRowRemove);
-
 
                 btnRemove.setOnClickListener(new View.OnClickListener() {
 

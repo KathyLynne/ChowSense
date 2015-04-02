@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/search_btn_text"
                     android:id="@+id/findRecipesButton"
-                    android:layout_marginTop="144dp" android:background="@drawable/bottom_bar"
+                    android:layout_marginTop="15dp" android:background="@drawable/bottom_bar"
                     android:layout_gravity="bottom|center_horizontal"/>
         </LinearLayout>
     </ScrollView>
