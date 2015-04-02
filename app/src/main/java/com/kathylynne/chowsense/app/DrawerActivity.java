@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -41,7 +40,7 @@ public class DrawerActivity extends ActionBarActivity {
     private FragmentManager fragmentManager = getFragmentManager();
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
-    static Bitmap photo;
+    //static Bitmap photo;
     private static final String TAG = "logging errors(On Drawer)";
 
     @Override

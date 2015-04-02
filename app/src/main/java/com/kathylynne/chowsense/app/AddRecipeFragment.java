@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.parse.SaveCallback;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Kate on 2015-03-29.
@@ -39,6 +41,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     public String recipeId;
     Button btnSave;
 
+    public File output;
     ImageButton cameraBtn;
     public ImageView photoView;
     public Bitmap photo;
@@ -67,11 +70,12 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         final String tag = "tag";
         //for some reason, has to stay here.
         if (recipeId == null) {
+
             recipe.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        //worked
+                        recipeId = recipe.getRecipeId();
                     } else {
                         //didn't work
                     }
@@ -86,42 +90,45 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onClick(View v) {
 
-                File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                File filePicture = new File(pictureFolder, "temp.jpg");
+                File imagesFolder = new File(Environment.getExternalStorageDirectory(), "Chowsense");
+                if (!imagesFolder.exists()) {
+                    imagesFolder.mkdirs();
+                }
+                UUID pictureID = UUID.randomUUID();
+                String fileName = "image_" + pictureID.toString() + ".jpg";
+                output = new File(imagesFolder, fileName);
 /*
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 getActivity().startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
 
-                if (filePicture.exists()) {
-                    Uri outPutFileUri = Uri.fromFile(filePicture);
+                Uri outPutFileUri = Uri.fromFile(output);
                     Intent intentStartCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     intentStartCamera.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
                     getActivity().startActivity(intentStartCamera);
-                } else {
-                    Toast.makeText(getActivity(), "There was a problem creating the file", Toast.LENGTH_SHORT).show();
-                }
 
-                if (filePicture.exists()) {
-                    photo = decodeImage(filePicture.getPath());
-                } else {
-                    Toast.makeText(getActivity(), "There was a problem loading the image", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
     }
 
+
     private Bitmap decodeImage(String filePath) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        return BitmapFactory.decodeFile(filePath, options);
+        return BitmapFactory.decodeFile(filePath);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (DrawerActivity.photo != null) {
-            photoView.setImageBitmap(DrawerActivity.photo);
+        String Tag = "help with camera:";
+        if (output != null) {
+            photo = decodeImage(output.getPath());
+            Log.i(Tag, "output is not null: " + output.getPath());
+        } else {
+            Log.i(Tag, "output is null");
+        }
+        if (photo != null) {
+            photoView.setImageBitmap(photo);
+            Log.i(Tag, "photo is not null, should have decoded");
         }
     }
 
@@ -146,19 +153,19 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
                 }
 
-                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
-
 
                 recipe.setTitle(title.getText().toString());
                 recipe.setDescription(description.getText().toString());
                 recipe.setSteps(steps);
                 recipe.setUser();
 
-                if (DrawerActivity.photo != null) {
+                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
+
+                if (photo != null) {
 
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    DrawerActivity.photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    photo.compress(Bitmap.CompressFormat.JPEG, 20, stream);
                     byte[] bitMapData = stream.toByteArray();
 
                     ParseFile imgFile = new ParseFile(photoName, bitMapData);
@@ -187,9 +194,26 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
                 }
 
-                recipe.setIngredients(ingToRecipe);
-                recipe.saveInBackground();
+                Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_LONG).show();
+                btnSave.setVisibility(View.GONE);
+                //recipe.saveInBackground();
+                recipe.saveInBackground(new SaveCallback() {
+                    public void done(ParseException e) {
                 Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+ /*       String userName = ParseUser.getCurrentUser().get("username").toString();
+        Fragment fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
+
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, fragment).commit();
+                } else {
+                    // error in creating fragment
+                    Log.e("MainActivity", "Error in creating fragment");
+                }*/
+
         }
     }
 
