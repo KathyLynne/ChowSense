@@ -47,7 +47,7 @@ public class RecipeDetailsActivity extends ActionBarActivity {
         final LinearLayout ingredientsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_ingredients);
         final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
 
-        recipeID = "cVy8uOmil4";
+        recipeID = "zFLzvhi6uw";
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
         query.getInBackground(recipeID, new GetCallback<ParseObject>() {

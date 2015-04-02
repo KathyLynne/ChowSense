@@ -2,8 +2,13 @@ package com.kathylynne.chowsense.app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +16,11 @@ import android.widget.*;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +39,10 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
     public String recipeId;
     Button btnSave;
 
+    ImageButton cameraBtn;
+    public ImageView photoView;
+    public Bitmap photo;
+    public static final int TAKE_PICTURE = 1888;
     Recipe recipe = new Recipe();
 
     @Override
@@ -42,6 +54,10 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         btnAddStep = (ImageButton) layout.findViewById(R.id.btnAddStep);
         btnSave = (Button) layout.findViewById(R.id.saveRecipeButton);
         btnSave.setOnClickListener(this);
+
+        cameraBtn = (ImageButton) layout.findViewById(R.id.cameraBtn);
+        photoView = (ImageView) layout.findViewById(R.id.cameraImgView);
+
         return layout;
     }
 
@@ -50,23 +66,71 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         super.onActivityCreated(savedInstanceState);
         final String tag = "tag";
         //for some reason, has to stay here.
-        recipe.saveInBackground(new SaveCallback() {
+        if (recipeId == null) {
+            recipe.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        //worked
+                    } else {
+                        //didn't work
+                    }
+                }
+            });
+        }
+        recipeId = recipe.getRecipeId();
+        add(getActivity(), btnAdd);
+        addSteps(getActivity(), btnAddStep);
+
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    recipeId = recipe.getObjectId();
-                    //show the recipeId is not null in logCat
-                    Log.i(tag, "object id, " + recipeId);
+            public void onClick(View v) {
+
+                File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                File filePicture = new File(pictureFolder, "temp.jpg");
+/*
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                getActivity().startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
+
+                if (filePicture.exists()) {
+                    Uri outPutFileUri = Uri.fromFile(filePicture);
+                    Intent intentStartCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intentStartCamera.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
+                    getActivity().startActivity(intentStartCamera);
                 } else {
-                    //didn't work
+                    Toast.makeText(getActivity(), "There was a problem creating the file", Toast.LENGTH_SHORT).show();
+                }
+
+                if (filePicture.exists()) {
+                    photo = decodeImage(filePicture.getPath());
+                } else {
+                    Toast.makeText(getActivity(), "There was a problem loading the image", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        recipeId = recipe.getRecipeId();
-        add(getActivity(), btnAdd);
-        addSteps(getActivity(), btnAddStep);
     }
+
+    private Bitmap decodeImage(String filePath) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (DrawerActivity.photo != null) {
+            photoView.setImageBitmap(DrawerActivity.photo);
+        }
+    }
+
+/*    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(photo);
+        }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -81,10 +145,25 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     steps.add(stepToSave);
 
                 }
+
+                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
+
+
                 recipe.setTitle(title.getText().toString());
                 recipe.setDescription(description.getText().toString());
                 recipe.setSteps(steps);
                 recipe.setUser();
+
+                if (DrawerActivity.photo != null) {
+
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    DrawerActivity.photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] bitMapData = stream.toByteArray();
+
+                    ParseFile imgFile = new ParseFile(photoName, bitMapData);
+                    recipe.setPhoto(imgFile);
+                }
 
                 //save the ingredients that are present at the time of buttonClick
                 LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
@@ -113,7 +192,6 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void add(final Activity activity, ImageButton btn) {
 
