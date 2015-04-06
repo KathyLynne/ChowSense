@@ -45,6 +45,27 @@
                         />
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:gravity="center_vertical"
+                android:id="@+id/details_favorite_layout">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@drawable/favorite_false"
+                    android:id="@+id/detail_favorite_image"
+                    android:clickable="true"
+                    android:onClick="favoriteAction"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/favorites_false"
+                    android:id="@+id/textView_favorites"
+                    android:clickable="true"
+                    android:onClick="favoriteAction"/>
+        </LinearLayout>
         <TextView android:id="@+id/details_ingredients_title"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"

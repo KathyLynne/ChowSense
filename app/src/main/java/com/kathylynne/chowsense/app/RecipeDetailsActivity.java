@@ -6,9 +6,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.*;
@@ -24,17 +27,21 @@ public class RecipeDetailsActivity extends ActionBarActivity {
     public TextView description;
     public String recipeID;
     public ParseImageView imageView;
-
+    public TextView favoritesText;
+    public ImageView favoritesImage;
+    private String userId = ParseUser.getCurrentUser().getObjectId();
 
     //public TextView description = (TextView)findViewById(R.id.recipe_detail_description);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         setContentView(R.layout.activity_recipe_details);
-
         title = (TextView) findViewById(R.id.recipe_detail_title);
         description = (TextView) findViewById(R.id.recipe_detail_description);
+        favoritesImage = (ImageView) findViewById(R.id.detail_favorite_image);
+        favoritesText = (TextView) findViewById(R.id.textView_favorites);
         TextView ingredientsTitle = (TextView) findViewById(R.id.details_ingredients_title);
         TextView stepTitle = (TextView) findViewById(R.id.details_steps_title);
         ingredientsTitle.setTextColor(Color.BLACK);
@@ -48,12 +55,37 @@ public class RecipeDetailsActivity extends ActionBarActivity {
         final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
 
         recipeID = "1bSWA4Gsaa";
+        //ArrayList<String> favorites = (ArrayList<String>)currentUser.get("UserFavourites");
+
+        ParseQuery<ParseObject> FavQuery = ParseQuery.getQuery("Favorites");
+        FavQuery.whereEqualTo("UserId", userId);
+        FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    favoritesText.setText(getText(R.string.favorites_true));
+
+                    ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
+
+                    Toast.makeText(RecipeDetailsActivity.this, object.getObjectId().toString(), Toast.LENGTH_SHORT).show();
+
+                    for (int x = 0; x < favorites.size(); x++) {
+                        if (favorites.get(x).equals(recipeID)) {
+                            favoritesImage.setImageResource(R.drawable.favorite_true);
+                            favoritesText.setText(getText(R.string.favorites_true));
+                            break;
+                        }
+                    }
+                }
+            }
+        });
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
         query.getInBackground(recipeID, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     Recipe recipe = (Recipe) object;
+
+
                     title.setText(recipe.getTitle());
                     description.setText(recipe.getDescription());
                     // image.setParseFile(recipe.getPhoto());
@@ -64,7 +96,6 @@ public class RecipeDetailsActivity extends ActionBarActivity {
                         public void done(byte[] data, ParseException e) {
                         }
                     });
-
 
                     ArrayList<String> steps = recipe.getSteps();
                     // ArrayList<Ingredient> ingredients = recipe.getIngredients();
@@ -114,6 +145,38 @@ public class RecipeDetailsActivity extends ActionBarActivity {
 
     }
 
+    public void favoriteAction(View v) {
+        ParseQuery<ParseObject> FavQuery = ParseQuery.getQuery("Favorites");
+        FavQuery.whereEqualTo("UserId", userId);
+        FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    favoritesText.setText(getText(R.string.favorites_true));
+
+                    ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
+                    boolean favorite = false;
+
+                    for (int x = 0; x < favorites.size(); x++) {
+                        if (favorites.get(x).equals(recipeID)) {
+                            favorites.remove(x);
+                            favorite = true;
+                            favoritesImage.setImageResource(R.drawable.favorite_false);
+                            favoritesText.setText(getText(R.string.favorites_false));
+                            break;
+                        }
+                    }
+
+                    if (!favorite) {
+                        favorites.add(recipeID);
+                        favoritesImage.setImageResource(R.drawable.favorite_true);
+                        favoritesText.setText(getText(R.string.favorites_true));
+                    }
+                    object.put("RecipeId", favorites);
+                    object.saveInBackground();
+                }
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

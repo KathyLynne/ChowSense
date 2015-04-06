@@ -35,6 +35,8 @@
     <string name="password_confirm">Confirm Password:</string>
     <string name="search_prompt">What is in the cupboards?</string>
     <string name="search_btn_text">Make Chowsense!</string>
+    <string name="favorites_false">Add to Favorites</string>
+    <string name="favorites_true">Remove from Favorites</string>
 
 
     <string-array name="navigation_drawer_items_array">

@@ -2,6 +2,7 @@ package com.kathylynne.chowsense.app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
@@ -68,7 +70,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         super.onActivityCreated(savedInstanceState);
         //for some reason, has to stay here.
 
-        if (recipeId == null) {
+ /*       if (recipeId == null) {
 
             recipe.saveInBackground(new SaveCallback() {
                 @Override
@@ -80,8 +82,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     }
                 }
             });
-        }
-        recipeId = recipe.getRecipeId();
+        }*/
         add(getActivity(), btnAdd);
         addSteps(getActivity(), btnAddStep);
 
@@ -188,7 +189,75 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
 //>>>>>>> 9379b63050a2bf3f13f36aa7579d38797d4e4704
                 //save the ingredients that are present at the time of buttonClick
-                LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
+
+                Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_LONG).show();
+                btnSave.setVisibility(View.GONE);
+
+                final String tag = "tag";
+                boolean success = false;
+
+                //recipe.saveInBackground();
+
+                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,!?<>']", "") + ".jpg";
+
+                if (photo != null) {
+
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                    byte[] bitMapData = stream.toByteArray();
+
+                    ParseFile imgFile = new ParseFile(photoName, bitMapData);
+                    recipe.setPhoto(imgFile);
+                }
+
+                recipe.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            recipeId = recipe.getRecipeId();
+                            LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
+                            for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
+                                final Ingredient ingredient = new Ingredient();
+
+                                LinearLayout innerLayout = (LinearLayout) scrollViewLinearLayout.getChildAt(i);
+                                EditText name = (EditText) innerLayout.findViewById(R.id.editDescricao);
+                                EditText qty = (EditText) innerLayout.findViewById(R.id.qtyText);
+                                Spinner measure = (Spinner) innerLayout.findViewById(R.id.spinner);
+
+                                String choice = measure.getSelectedItem().toString();
+                                String iName = name.getText().toString();
+                                String iQty = qty.getText().toString();
+                                ingredient.setName(iName);
+                                //concatenate measure put to have the measure as well.
+                                ingredient.setMeasure(iQty + " " + choice);
+                                ingredient.setRecipeID(recipeId);
+                                ingredient.saveInBackground();
+                                //ingToRecipe.add(ingredient);
+
+                            }
+                            Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
+
+                            String userName = ParseUser.getCurrentUser().get("username").toString();
+                            Fragment fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
+
+                            if (fragment != null) {
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, fragment).commit();
+                            } else {
+                                // error in creating fragment
+                                Log.e("MainActivity", "Error in creating fragment");
+                            }
+
+                        } else {
+                            Toast.makeText(getActivity(), "Save Failed...Try Again Later.\n\n" + e.toString(), Toast.LENGTH_LONG).show();
+                            btnSave.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
+                /*LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
                     final Ingredient ingredient = new Ingredient();
 
@@ -208,29 +277,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     //ingToRecipe.add(ingredient);
 
                 }
-
-                Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_LONG).show();
-                btnSave.setVisibility(View.GONE);
-
-                final String tag = "tag";
-                boolean success = false;
-
-                //recipe.saveInBackground();
-
-                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,]", "") + ".jpg";
-
-                if (photo != null) {
-
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    photo.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                    byte[] bitMapData = stream.toByteArray();
-
-                    ParseFile imgFile = new ParseFile(photoName, bitMapData);
-                    recipe.setPhoto(imgFile);
-                }
-
-                recipe.saveInBackground();
+*/
                 /*do {
                     try {
                         recipe.save();
@@ -243,8 +290,6 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                     }
                 }while(!success);
 */
-                Toast.makeText(getActivity(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
-
 
 
                /* while(!verifyUpload(recipeId)){
