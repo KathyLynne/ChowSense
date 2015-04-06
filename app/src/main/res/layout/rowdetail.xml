@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/rowdetail"
-              android:layout_width="match_parent"
+              android:layout_width="fill_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal"
               android:theme="@style/ToolBarTheme">
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner" android:layout_weight="0.15"
-            style="@style/Widget.AppCompat.Spinner"/>
+            style="@style/Widget.AppCompat.Spinner" android:clickable="true" android:spinnerMode="dialog"/>
     <EditText android:id="@+id/editDescricao"
               android:layout_width="0dp"
               android:layout_height="wrap_content"

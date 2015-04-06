@@ -10,9 +10,9 @@
             android:layout_height="wrap_content">
         <com.parse.ParseImageView
                 android:layout_width="145dp"
-                android:layout_height="124dp"
+                android:layout_height="85dp"
                 android:id="@+id/recipe_list_row_image"
-                android:src="@drawable/recipe"/>
+                android:src="@drawable/recipe" android:layout_marginRight="15dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -21,12 +21,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/recipe_list_row_title"/>
+                    android:id="@+id/recipe_list_row_title" android:textColor="#1B5E20"/>
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/recipe_list_row_Description"/>
+                    android:id="@+id/recipe_list_row_Description" android:textColor="#4CAF50"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
