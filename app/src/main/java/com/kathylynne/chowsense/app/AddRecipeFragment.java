@@ -133,6 +133,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
             Toast.makeText(getActivity(), "Photo not taken!", Toast.LENGTH_SHORT).show();
             image = null;
         }
+
         return image;
     }
 
@@ -179,8 +180,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setSteps(steps);
                 recipe.setUser();
 
+//<<<<<<< HEAD
 
 
+//=======
+
+
+//>>>>>>> 9379b63050a2bf3f13f36aa7579d38797d4e4704
                 //save the ingredients that are present at the time of buttonClick
                 LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {

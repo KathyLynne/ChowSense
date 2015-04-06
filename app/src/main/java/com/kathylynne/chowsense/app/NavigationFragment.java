@@ -3,7 +3,6 @@ package com.kathylynne.chowsense.app;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private FragmentActivity frag;
     private String userName = ParseUser.getCurrentUser().getUsername().toString();
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //frag = super.getActivity();
