@@ -1,29 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/details_container"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffffff">
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/Base.V7.Theme.AppCompat">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
+                  android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
-                  android:id="@+id/recipe_detail_container">
+                  android:id="@+id/frag_recipe_detail_container">
         <com.parse.ParseImageView
-                android:id="@+id/details_image"
-                android:layout_width="match_parent"
+                android:id="@+id/frag_details_image"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"/>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="horizontal"
-                      android:id="@+id/recipe_header_container">
+                      android:id="@+id/frag_recipe_header_container" android:baselineAligned="false">
 
             <LinearLayout android:layout_width="0dp"
                           android:layout_height="wrap_content"
                           android:orientation="vertical"
                           android:layout_weight="1"
-                          android:id="@+id/title_wrap_title_layout">
-                <TextView android:id="@+id/recipe_detail_title"
+                          android:id="@+id/frag_title_wrap_title_layout">
+                <TextView android:id="@+id/frag_recipe_detail_title"
                           android:layout_height="wrap_content"
                           android:layout_width="fill_parent"
                           android:textAppearance="?android:attr/textAppearanceLarge"
@@ -33,7 +37,7 @@
                           android:paddingLeft="20dp"
                           android:paddingRight="20dp"
                           android:gravity="center"/>
-                <TextView android:id="@+id/recipe_detail_description"
+                <TextView android:id="@+id/frag_recipe_detail_description"
                           android:layout_height="wrap_content"
                           android:layout_width="fill_parent"
                           android:textAppearance="?android:attr/textAppearanceMedium"
@@ -49,44 +53,46 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" android:gravity="center_vertical"
-                android:id="@+id/details_favorite_layout">
+                android:id="@+id/frag_details_favorite_layout">
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:src="@drawable/favorite_false"
-                    android:id="@+id/detail_favorite_image"
+                    android:id="@+id/frag_detail_favorite_image"
                     android:clickable="true"
-                    android:onClick="favoriteAction"/>
+                    android:contentDescription="@string/favourites"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/favorites_false"
-                    android:id="@+id/textView_favorites"
+                    android:id="@+id/frag_textView_favorites"
                     android:clickable="true"
-                    android:onClick="favoriteAction"/>
+
+                    android:textColor="#ff4caf50"/>
         </LinearLayout>
-        <TextView android:id="@+id/details_ingredients_title"
+        <TextView android:id="@+id/frag_details_ingredients_title"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"
                   android:text="@string/ingredientsDetailText"
                   android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:layout_margin="20dp"/>
+                  android:layout_margin="10dp"/>
         <LinearLayout android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:id="@+id/details_wrap_ingredients">
+                      android:id="@+id/frag_details_wrap_ingredients">
         </LinearLayout>
-        <TextView android:id="@+id/details_steps_title"
+        <TextView android:id="@+id/frag_details_steps_title"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"
                   android:text="@string/stepsDetailText"
                   android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:layout_margin="20dp"/>
+                  android:layout_margin="10dp"/>
         <LinearLayout android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:id="@+id/details_wrap_steps">
+                      android:id="@+id/frag_details_wrap_steps">
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+</RelativeLayout>

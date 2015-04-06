@@ -3,6 +3,7 @@ package com.kathylynne.chowsense.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import com.kathylynne.chowsense.app.model.Favorites;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.Parse;
@@ -18,8 +19,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ParseObject.registerSubclass(Ingredient.class);
         ParseObject.registerSubclass(Recipe.class);
+        ParseObject.registerSubclass(Favorites.class);
         ParseObject.create("Recipe");
         ParseObject.create("Ingredient");
+        ParseObject.create("Favorites");
         // TODO remember to check these keys on parse.
         Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
 

@@ -28,7 +28,8 @@
                           android:textAppearance="?android:attr/textAppearanceMedium" android:layout_weight="1.00"/>
                 <ImageButton android:id="@+id/addSearchTerm" android:layout_width="wrap_content"
                              android:layout_height="wrap_content" android:contentDescription="@string/btnAdd"
-                             android:onClick="addSearchTerm" android:src="@android:drawable/ic_input_add"/>
+                             android:onClick="addSearchTerm" android:src="@android:drawable/ic_input_add"
+                             android:background="#ffffffff"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
@@ -41,8 +42,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/search_btn_text"
                     android:id="@+id/findRecipesButton"
-                    android:layout_marginTop="15dp" android:background="@drawable/bottom_bar"
-                    android:layout_gravity="bottom|center_horizontal"/>
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="#ff4caf50" android:textColor="#fefffafe"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

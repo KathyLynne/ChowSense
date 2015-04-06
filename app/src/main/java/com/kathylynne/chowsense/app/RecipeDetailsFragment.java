@@ -1,17 +1,14 @@
 package com.kathylynne.chowsense.app;
 
+
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.*;
@@ -20,42 +17,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecipeDetailsActivity extends ActionBarActivity {
+public class RecipeDetailsFragment extends Fragment implements View.OnClickListener {
 
 
+    public static final String RECIPE_ID_PARAM = "Recipe ID for details: ";
+
+    // private String recipeId;
     public TextView title;
     public TextView description;
-    public String recipeID;
+    private String recipeID;
     public ParseImageView imageView;
+    private RelativeLayout layout;
+    private String userId;
     public TextView favoritesText;
     public ImageView favoritesImage;
-    private String userId = ParseUser.getCurrentUser().getObjectId();
 
-    //public TextView description = (TextView)findViewById(R.id.recipe_detail_description);
+
+    public static RecipeDetailsFragment newInstance(String param, String recipeId) {
+        RecipeDetailsFragment fragment = new RecipeDetailsFragment();
+        Bundle args = new Bundle();
+        args.putString(RECIPE_ID_PARAM, recipeId);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public RecipeDetailsFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
-        setContentView(R.layout.activity_recipe_details);
-        title = (TextView) findViewById(R.id.recipe_detail_title);
-        description = (TextView) findViewById(R.id.recipe_detail_description);
-        favoritesImage = (ImageView) findViewById(R.id.detail_favorite_image);
-        favoritesText = (TextView) findViewById(R.id.textView_favorites);
-        TextView ingredientsTitle = (TextView) findViewById(R.id.details_ingredients_title);
-        TextView stepTitle = (TextView) findViewById(R.id.details_steps_title);
+        if (getArguments() != null) {
+            recipeID = getArguments().getString(RECIPE_ID_PARAM);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        layout = (RelativeLayout) inflater.inflate(R.layout.fragment_recipe_details, container, false);
+
+        title = (TextView) layout.findViewById(R.id.frag_recipe_detail_title);
+        description = (TextView) layout.findViewById(R.id.frag_recipe_detail_description);
+        TextView ingredientsTitle = (TextView) layout.findViewById(R.id.frag_details_ingredients_title);
+        TextView stepTitle = (TextView) layout.findViewById(R.id.frag_details_steps_title);
         ingredientsTitle.setTextColor(Color.BLACK);
         stepTitle.setTextColor(Color.BLACK);
         title.setTextColor(Color.BLACK);
+        favoritesImage = (ImageView) layout.findViewById(R.id.frag_detail_favorite_image);
+        favoritesImage.setOnClickListener(this);
+        favoritesText = (TextView) layout.findViewById(R.id.frag_textView_favorites);
+        favoritesText.setOnClickListener(this);
+        imageView = (ParseImageView) layout.findViewById(R.id.frag_details_image);
+        userId = ParseUser.getCurrentUser().getObjectId();
 
-        imageView = (ParseImageView) findViewById(R.id.details_image);
+        final LinearLayout ingredientsLayout = (LinearLayout) layout.findViewById(R.id.frag_details_wrap_ingredients);
+        final LinearLayout stepsLayout = (LinearLayout) layout.findViewById(R.id.frag_details_wrap_steps);
 
-
-        final LinearLayout ingredientsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_ingredients);
-        final LinearLayout stepsLayout = (LinearLayout) this.findViewById(R.id.details_wrap_steps);
-
-        recipeID = "1bSWA4Gsaa";
-        //ArrayList<String> favorites = (ArrayList<String>)currentUser.get("UserFavourites");
+        //recipeID = "1bSWA4Gsaa";
 
         ParseQuery<ParseObject> FavQuery = ParseQuery.getQuery("Favorites");
         FavQuery.whereEqualTo("UserId", userId);
@@ -66,7 +88,7 @@ public class RecipeDetailsActivity extends ActionBarActivity {
 
                     ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
 
-                    Toast.makeText(RecipeDetailsActivity.this, object.getObjectId().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), object.getObjectId().toString(), Toast.LENGTH_SHORT).show();
 
                     for (int x = 0; x < favorites.size(); x++) {
                         if (favorites.get(x).equals(recipeID)) {
@@ -84,8 +106,6 @@ public class RecipeDetailsActivity extends ActionBarActivity {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     Recipe recipe = (Recipe) object;
-
-
                     title.setText(recipe.getTitle());
                     description.setText(recipe.getDescription());
                     // image.setParseFile(recipe.getPhoto());
@@ -96,6 +116,7 @@ public class RecipeDetailsActivity extends ActionBarActivity {
                         public void done(byte[] data, ParseException e) {
                         }
                     });
+
 
                     ArrayList<String> steps = recipe.getSteps();
                     // ArrayList<Ingredient> ingredients = recipe.getIngredients();
@@ -112,7 +133,7 @@ public class RecipeDetailsActivity extends ActionBarActivity {
                                 }
 
                                 for (int x = 0; x < ingredients.size(); x++) {
-                                    final LinearLayout newView = (LinearLayout) RecipeDetailsActivity.this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
+                                    final LinearLayout newView = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.recipe_details_row, null);
                                     newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                                     TextView ingredientView = (TextView) newView.findViewById(R.id.detail_recipe_text);
 
@@ -126,9 +147,8 @@ public class RecipeDetailsActivity extends ActionBarActivity {
                     });
 
 
-
                     for (int x = 0; x < steps.size(); x++) {
-                        final LinearLayout newView = (LinearLayout) RecipeDetailsActivity.this.getLayoutInflater().inflate(R.layout.recipe_details_row, null);
+                        final LinearLayout newView = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.recipe_details_row, null);
                         newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         TextView stepsView = (TextView) newView.findViewById(R.id.detail_recipe_text);
 
@@ -143,61 +163,43 @@ public class RecipeDetailsActivity extends ActionBarActivity {
             }
         });
 
+        return layout;
     }
 
-    public void favoriteAction(View v) {
-        ParseQuery<ParseObject> FavQuery = ParseQuery.getQuery("Favorites");
-        FavQuery.whereEqualTo("UserId", userId);
-        FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    favoritesText.setText(getText(R.string.favorites_true));
 
-                    ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
-                    boolean favorite = false;
-
-                    for (int x = 0; x < favorites.size(); x++) {
-                        if (favorites.get(x).equals(recipeID)) {
-                            favorites.remove(x);
-                            favorite = true;
-                            favoritesImage.setImageResource(R.drawable.favorite_false);
-                            favoritesText.setText(getText(R.string.favorites_false));
-                            break;
-                        }
-                    }
-
-                    if (!favorite) {
-                        favorites.add(recipeID);
-                        favoritesImage.setImageResource(R.drawable.favorite_true);
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.frag_detail_favorite_image || v.getId() == R.id.frag_textView_favorites) {
+            ParseQuery<ParseObject> FavQuery = ParseQuery.getQuery("Favorites");
+            FavQuery.whereEqualTo("UserId", userId);
+            FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+                public void done(ParseObject object, ParseException e) {
+                    if (e == null) {
                         favoritesText.setText(getText(R.string.favorites_true));
+
+                        ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
+                        boolean favorite = false;
+
+                        for (int x = 0; x < favorites.size(); x++) {
+                            if (favorites.get(x).equals(recipeID)) {
+                                favorites.remove(x);
+                                favorite = true;
+                                favoritesImage.setImageResource(R.drawable.favorite_false);
+                                favoritesText.setText(getText(R.string.favorites_false));
+                                //break;
+                            }
+                        }
+
+                        if (!favorite) {
+                            favorites.add(recipeID);
+                            favoritesImage.setImageResource(R.drawable.favorite_true);
+                            favoritesText.setText(getText(R.string.favorites_true));
+                        }
+                        object.put("RecipeId", favorites);
+                        object.saveInBackground();
                     }
-                    object.put("RecipeId", favorites);
-                    object.saveInBackground();
                 }
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_recipe_detail, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            });
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

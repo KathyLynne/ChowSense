@@ -1,41 +1,52 @@
 package com.kathylynne.chowsense.app.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.kathylynne.chowsense.app.R;
-import com.kathylynne.chowsense.app.RecipeSearchFragment;
-import com.kathylynne.chowsense.app.model.Ingredient;
+import com.kathylynne.chowsense.app.model.Favorites;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by Kate on 2015-04-01.
+ * Created by Kate on 2015-04-06.
  */
-public class SearchListQueryAdapter extends ParseQueryAdapter {
+public class UserFavouritesListAdapter extends ParseQueryAdapter {
 
-    //private String[] searchTerms = RecipeSearchFragment.searchTerms;
+    public static ArrayList<ParseObject> userFavouritesArray = new ArrayList<ParseObject>();
+    private static final String TAG = "Query Failure";
 
-    public SearchListQueryAdapter(Context context) {
-        // Use the QueryFactory to construct a PQA that will only show
+
+    public UserFavouritesListAdapter(final Context context) {
 
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery create() {
-                ParseQuery query = new ParseQuery(Ingredient.class);
-                query.whereContainedIn("IngredientName", (Collection) RecipeSearchFragment.search);
+                String user = ParseUser.getCurrentUser().getObjectId();
+                ParseQuery<ParseObject> query = new ParseQuery(Favorites.class);
                 ParseQuery recipeQuery = new ParseQuery(Recipe.class);
-                recipeQuery.whereMatchesKeyInQuery("objectId", "RecipeId", query);
+                query.whereEqualTo("UserId", user);
 
+                try {
+                    Favorites f = (Favorites) query.getFirst();
+                    userFavouritesArray = f.getFavorites();
+                    //Log.i(TAG, userFavouritesArray.get(0).toString());
+
+                    recipeQuery.whereContainedIn("objectId", (Collection) userFavouritesArray);
+
+                } catch (ParseException e) {
+                    Log.i(TAG, e.toString());
+                }
                 return recipeQuery;
             }
+
         });
     }
 
-
-    // Customize the layout by overriding getItemView
     @Override
     public View getItemView(ParseObject object, View v, ViewGroup parent) {
         if (v == null) {
@@ -45,8 +56,6 @@ public class SearchListQueryAdapter extends ParseQueryAdapter {
         super.getItemView(object, v, parent);
 
 
-        //left in for reference.
-        // Add and download the image
         ParseImageView recipeImage = (ParseImageView) v.findViewById(R.id.recipe_list_row_image);
         ParseFile imageFile = object.getParseFile("RecipePhoto");
         if (imageFile != null) {
@@ -61,9 +70,6 @@ public class SearchListQueryAdapter extends ParseQueryAdapter {
         // Add a reminder of how long this item has been outstanding
         TextView timestampView = (TextView) v.findViewById(R.id.recipe_list_row_Description);
         timestampView.setText(object.getString("RecipeDescription"));
-
-        //ImageView imageView = (ImageView) v.findViewById(R.id.recipe_list_row_image);
-        //imageView.
 
         return v;
     }

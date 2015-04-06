@@ -40,6 +40,7 @@ public class DrawerActivity extends ActionBarActivity {
     private String[] navMenuTitles;
     private FragmentManager fragmentManager = getFragmentManager();
     private ArrayList<NavDrawerItem> navDrawerItems;
+
     private NavDrawerListAdapter adapter;
     //static Bitmap photo;
     private static final String TAG = "logging errors(On Drawer)";
@@ -67,7 +68,7 @@ public class DrawerActivity extends ActionBarActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], android.R.drawable.star_off));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], android.R.drawable.ic_menu_view));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], android.R.drawable.ic_menu_info_details));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], android.R.drawable.ic_menu_info_details));
+
 
         //begin click functionality in drawer
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -122,6 +123,7 @@ public class DrawerActivity extends ActionBarActivity {
                 return true;
 
             case R.id.action_bar_search:
+                displayView(1);
                 return true;
 
             case R.id.action_bar_logout:
@@ -230,7 +232,7 @@ public class DrawerActivity extends ActionBarActivity {
                 break;
             case 3:
                 //String userName = ParseUser.getCurrentUser().get("username").toString();
-
+                fragment = RecipeFragment.newInstance(RecipeFragment.FAVOURITE_PARAM, userName);
                 break;
             case 4:
                 // fragment = new PagesFragment();
@@ -239,11 +241,7 @@ public class DrawerActivity extends ActionBarActivity {
             case 5:
                 //fragment = new WhatsHotFragment();
                 break;
-            case 6:
-                //just for testing and key passing
-                Intent intent = new Intent(this, RecipeDetailsActivity.class);
-                startActivity(intent);
-                break;
+
 
             default:
                 fragment = new NavigationFragment();

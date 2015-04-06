@@ -6,10 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.kathylynne.chowsense.app.R;
 import com.kathylynne.chowsense.app.model.Recipe;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
+import com.parse.*;
 
 /**
  * Created by Kate on 2015-03-31.
@@ -23,6 +20,7 @@ public class UserListQueryAdapter extends ParseQueryAdapter {
             public ParseQuery create() {
                 ParseQuery query = new ParseQuery(Recipe.class);
                 query.whereEqualTo("UserId", ParseUser.getCurrentUser().getUsername().toString());
+
                 return query;
             }
         });
@@ -38,14 +36,12 @@ public class UserListQueryAdapter extends ParseQueryAdapter {
         super.getItemView(object, v, parent);
 
 
-        //left in for reference.
-        // Add and download the image
-        /*ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.icon);
-        ParseFile imageFile = object.getParseFile("image");
+        ParseImageView recipeImage = (ParseImageView) v.findViewById(R.id.recipe_list_row_image);
+        ParseFile imageFile = object.getParseFile("RecipePhoto");
         if (imageFile != null) {
-            todoImage.setParseFile(imageFile);
-            todoImage.loadInBackground();
-        }*/
+            recipeImage.setParseFile(imageFile);
+            recipeImage.loadInBackground();
+        }
 
         // Add the title view
         TextView titleTextView = (TextView) v.findViewById(R.id.recipe_list_row_title);
