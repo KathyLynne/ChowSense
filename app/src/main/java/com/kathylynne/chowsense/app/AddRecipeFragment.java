@@ -126,6 +126,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
             image = Bitmap.createScaledBitmap(image, maxWidth, maxHeight, true);
 
+<<<<<<< HEAD
         } catch (Exception ex) {
             if (output.exists() || output != null) {
                 output.delete();
@@ -133,6 +134,22 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
             Toast.makeText(getActivity(), "Photo not taken!", Toast.LENGTH_SHORT).show();
             image = null;
         }
+=======
+    private Bitmap formatImage(String filePath, int maxW, int maxH) {
+        Bitmap image = BitmapFactory.decodeFile(filePath);
+
+        int maxWidth = maxW;
+        int maxHeight = maxH;
+
+        if (image.getHeight() > image.getWidth()) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            image = Bitmap.createBitmap(image, 0, 0, image.getWidth(), image.getHeight(), matrix, true);
+        }
+
+        image = Bitmap.createScaledBitmap(image, maxWidth, maxHeight, true);
+
+>>>>>>> 9379b63050a2bf3f13f36aa7579d38797d4e4704
         return image;
     }
 
@@ -179,8 +196,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setSteps(steps);
                 recipe.setUser();
 
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 9379b63050a2bf3f13f36aa7579d38797d4e4704
                 //save the ingredients that are present at the time of buttonClick
                 LinearLayout scrollViewLinearLayout = (LinearLayout) layout.findViewById(R.id.linearLayoutForm);
                 for (int i = 0; i < scrollViewLinearLayout.getChildCount(); i++) {
