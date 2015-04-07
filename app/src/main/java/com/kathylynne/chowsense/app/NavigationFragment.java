@@ -2,6 +2,7 @@ package com.kathylynne.chowsense.app;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -51,25 +52,37 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         Fragment fragment;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        String stackName = null;
 
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         switch (v.getId()) {
             case R.id.searchImageButton:
+                stackName = "Menu";
                 fragment = new RecipeSearchFragment();
                 ft.replace(R.id.frame_container, fragment);
                 break;
             case R.id.addImageButton:
+                stackName = "Menu";
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 fragment = new AddRecipeFragment();
                 ft.replace(R.id.frame_container, fragment);
                 break;
             case R.id.favouriteImageButton:
+                stackName = "Menu";
+                fragment = RecipeFragment.newInstance(RecipeFragment.FAVOURITE_PARAM, userName);
+                ft.replace(R.id.frame_container, fragment);
+
                 break;
             case R.id.myImageButton:
+                stackName = "Menu";
                 fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
                 ft.replace(R.id.frame_container, fragment);
                 break;
         }
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(stackName);
         ft.commit();
 
     }
+
 }

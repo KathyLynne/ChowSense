@@ -27,6 +27,7 @@
                           android:orientation="vertical"
                           android:layout_weight="1"
                           android:id="@+id/frag_title_wrap_title_layout">
+
                 <TextView android:id="@+id/frag_recipe_detail_title"
                           android:layout_height="wrap_content"
                           android:layout_width="fill_parent"
@@ -46,7 +47,7 @@
                           android:textAlignment="center"
                           android:paddingLeft="8dp"
                           android:paddingRight="8dp"
-                        />
+                          android:textStyle="normal" android:textColor="#ff2c713b" android:visibility="visible"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
