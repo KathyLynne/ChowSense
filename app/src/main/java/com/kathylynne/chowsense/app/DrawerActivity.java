@@ -195,8 +195,26 @@ public class DrawerActivity extends ActionBarActivity {
      * onPostCreate() and onConfigurationChanged()...
      */
 
+
     public void onBackPressed() {
-        getFragmentManager().popBackStack();
+        FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(this.getFragmentManager().getBackStackEntryCount() - 1);
+        String str = "";
+
+        try {
+            if (backEntry.getName() != null) {
+                str = backEntry.getName();
+            }
+            if (str.equals("Nav")) {
+                finish(); // finish activity
+
+            } else if (str.equals("Menu")) {
+                displayView(0);
+            } else {
+                getFragmentManager().popBackStack();
+            }
+        } catch (Exception ex) {
+            displayView(0);
+        }
     }
 
     @Override
@@ -223,27 +241,33 @@ public class DrawerActivity extends ActionBarActivity {
         // update the main content by replacing fragments
         Fragment fragment = null;
         //RecipeFragment rFrag = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
+        String stackName = null;
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         switch (position) {
             case 0:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 fragment = new NavigationFragment();
-
+                stackName = "Nav";
                 break;
             case 1:
                 fragment = new RecipeSearchFragment();
+                stackName = "Menu";
                 break;
             case 2:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+                stackName = "Menu";
                 fragment = new AddRecipeFragment();
                 break;
             case 3:
                 //String userName = ParseUser.getCurrentUser().get("username").toString();
                 fragment = RecipeFragment.newInstance(RecipeFragment.FAVOURITE_PARAM, userName);
+                stackName = "Menu";
                 break;
             case 4:
                 // fragment = new PagesFragment();
                 fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
+                stackName = "Menu";
                 break;
             case 5:
                 //fragment = new WhatsHotFragment();
@@ -259,7 +283,7 @@ public class DrawerActivity extends ActionBarActivity {
         if (fragment != null) {
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+                    .replace(R.id.frame_container, fragment).addToBackStack(stackName).commit();
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
