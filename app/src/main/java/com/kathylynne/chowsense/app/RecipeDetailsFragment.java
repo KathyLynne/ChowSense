@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.Recipe;
 import com.parse.*;
@@ -84,12 +87,7 @@ public class RecipeDetailsFragment extends Fragment implements View.OnClickListe
         FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    favoritesText.setText(getText(R.string.favorites_true));
-
                     ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
-
-                    Toast.makeText(getActivity(), object.getObjectId().toString(), Toast.LENGTH_SHORT).show();
-
                     for (int x = 0; x < favorites.size(); x++) {
                         if (favorites.get(x).equals(recipeID)) {
                             favoritesImage.setImageResource(R.drawable.favorite_true);

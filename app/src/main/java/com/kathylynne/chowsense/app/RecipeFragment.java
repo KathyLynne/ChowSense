@@ -119,6 +119,7 @@ public class RecipeFragment extends ListFragment {
         Fragment fragment = RecipeDetailsFragment.newInstance(RecipeDetailsFragment.RECIPE_ID_PARAM, rId);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.frame_container, fragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 

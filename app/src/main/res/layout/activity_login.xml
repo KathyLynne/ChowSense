@@ -22,7 +22,7 @@
             <ImageView
                     android:layout_width="52dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/logo"
+                    android:src="@drawable/logolarge"
                     android:id="@+id/login_logo_imageView" android:contentDescription="@string/chowsense_logo"
                     android:layout_gravity="center_horizontal"/>
             <TextView

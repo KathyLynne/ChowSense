@@ -133,7 +133,9 @@ public class DrawerActivity extends ActionBarActivity {
                 if (user == null) {
                     Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                     Intent loginIntent = new Intent(this, LoginActivity.class);
+                    loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
+                    finish();
                 }
                 return true;
             //TODO settings
@@ -193,6 +195,10 @@ public class DrawerActivity extends ActionBarActivity {
      * onPostCreate() and onConfigurationChanged()...
      */
 
+    public void onBackPressed() {
+        getFragmentManager().popBackStack();
+    }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -222,6 +228,7 @@ public class DrawerActivity extends ActionBarActivity {
         switch (position) {
             case 0:
                 fragment = new NavigationFragment();
+
                 break;
             case 1:
                 fragment = new RecipeSearchFragment();
@@ -252,7 +259,7 @@ public class DrawerActivity extends ActionBarActivity {
         if (fragment != null) {
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).commit();
+                    .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
