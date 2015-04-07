@@ -24,7 +24,9 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center_vertical">
+                    android:layout_height="wrap_content" android:gravity="center_vertical"
+                    android:id="@+id/searchImageButtonLayout"
+                    android:clickable="true">
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -45,7 +47,9 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:id="@+id/addImageButtonLayout"
+                    android:clickable="true">
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -63,7 +67,9 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center_vertical">
+                    android:layout_height="wrap_content" android:gravity="center_vertical"
+                    android:id="@+id/favouriteImageButtonLayout"
+                    android:clickable="true">
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,7 +86,9 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center_vertical">
+                    android:layout_height="wrap_content" android:gravity="center_vertical"
+                    android:id="@+id/myImageButtonLayout"
+                    android:clickable="true">
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

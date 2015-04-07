@@ -1,16 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:background="#ffffffff">
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/scrollView"
-            android:fillViewport="true">
+            android:fillViewport="true" android:padding="10dp" android:layout_above="@+id/saveRecipeButton">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
@@ -102,11 +98,11 @@
                              android:src="@android:drawable/ic_input_add" android:cropToPadding="false"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/scrollView1"
-                          android:layout_width="match_parent"
+                          android:layout_width="fill_parent"
                           android:layout_height="wrap_content"
                     >
                 <LinearLayout android:id="@+id/linearLayoutForm"
-                              android:layout_width="match_parent"
+                              android:layout_width="fill_parent"
                               android:layout_height="wrap_content"
                               android:orientation="vertical">
                 </LinearLayout>
@@ -133,28 +129,28 @@
                              android:src="@android:drawable/ic_input_add"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/scrollView2"
-                          android:layout_width="match_parent"
+                          android:layout_width="fill_parent"
                           android:layout_height="wrap_content"
                     >
                 <LinearLayout android:id="@+id/stepLinearLayoutForm"
-                              android:layout_width="match_parent"
+                              android:layout_width="fill_parent"
                               android:layout_height="wrap_content"
                               android:orientation="vertical">
                 </LinearLayout>
             </LinearLayout>
 
 
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saveButton"
-                    android:textStyle="bold|italic"
-                    android:textSize="20sp"
-                    android:id="@+id/saveRecipeButton"
-                    android:layout_gravity="center_horizontal"
-                    android:background="#ff4caf50"
-                    android:padding="10dp"
-                    android:layout_marginTop="20dp"/>
         </LinearLayout>
     </ScrollView>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/saveButton"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/saveRecipeButton"
+            android:layout_gravity="center_horizontal"
+            android:background="#ff4caf50"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
 </RelativeLayout>

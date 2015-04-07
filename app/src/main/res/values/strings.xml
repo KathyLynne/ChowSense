@@ -38,6 +38,15 @@
     <string name="search_btn_text">Make Chowsense!</string>
     <string name="favorites_false">Add to Favorites</string>
     <string name="favorites_true">Remove from Favorites</string>
+    <string name="about_us">Chowsense is for those moments when you just do not know what to cook with what you have
+        got.
+
+        Be inspired with the recipes that are on hand in the app, or help inspire others by contributing to the
+        Chowsense community.
+    </string>
+    <string name="about_people">Chowsense is also the brainchild of Brody Smith and Kate Johnson. We had a great time
+        making the app, hoping you have a delicious time using it!
+    </string>
 
 
     <string-array name="navigation_drawer_items_array">

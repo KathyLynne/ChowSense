@@ -62,6 +62,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         cameraBtn = (ImageButton) layout.findViewById(R.id.cameraBtn);
         photoView = (ImageView) layout.findViewById(R.id.cameraImgView);
 
+
         return layout;
     }
 
@@ -85,6 +86,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         }*/
         add(getActivity(), btnAdd);
         addSteps(getActivity(), btnAddStep);
+        btnAdd.performClick();
+        btnAddStep.performClick();
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,7 +335,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 ImageButton btnRemove = (ImageButton) newView.findViewById(R.id.btnRemove);
                 //set up the spinner
                 spinner = (Spinner) newView.findViewById(R.id.spinner);
-                ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.measurement_array, android.R.layout.simple_spinner_item);
+                ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.measurement_array, R.layout.custom_spinner);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spinnerAdapter);
 

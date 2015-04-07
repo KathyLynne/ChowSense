@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/stepRowdetail"
               android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" android:weightSum="1">
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent" android:weightSum="1" android:gravity="right"
+        >
 
     <EditText
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/stepText" android:layout_weight="1.00" android:textColor="#fe000000"/>
+            android:ems="150"
+            android:id="@+id/stepText" android:layout_weight="1.00" android:textColor="#fe000000"
+            />
 
     <ImageButton android:id="@+id/btnRemove"
                  android:layout_width="wrap_content"
@@ -18,6 +20,7 @@
                  android:contentDescription="@string/btnRemove"
                  android:src="@android:drawable/ic_delete"
                  android:background="@android:color/transparent"
-                 android:padding="10dp"/>
+                 android:padding="10dp" android:layout_gravity="right"/>
+
 
 </LinearLayout>

@@ -4,9 +4,9 @@
               android:layout_width="fill_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal"
-              android:theme="@style/ToolBarTheme">
+              android:theme="@style/ToolBarTheme" android:gravity="center_horizontal">
     <EditText
-            android:layout_width="49dp"
+            android:layout_width="38dp"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
@@ -15,7 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner" android:layout_weight="0.15"
-            style="@style/Widget.AppCompat.Spinner" android:clickable="true" android:spinnerMode="dialog"/>
+            style="@style/spinner"
+
+            android:clickable="true" android:spinnerMode="dialog"/>
     <EditText android:id="@+id/editDescricao"
               android:layout_width="0dp"
               android:layout_height="wrap_content"

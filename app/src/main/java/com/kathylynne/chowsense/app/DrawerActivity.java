@@ -251,6 +251,7 @@ public class DrawerActivity extends ActionBarActivity {
                 stackName = "Nav";
                 break;
             case 1:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 fragment = new RecipeSearchFragment();
                 stackName = "Menu";
                 break;
@@ -270,7 +271,8 @@ public class DrawerActivity extends ActionBarActivity {
                 stackName = "Menu";
                 break;
             case 5:
-                //fragment = new WhatsHotFragment();
+                fragment = new AboutFragment();
+                stackName = "Menu";
                 break;
 
 
