@@ -4,14 +4,15 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:weightSum="1">
+              android:padding="20dp">
 
     <EditText android:layout_width="0dp"
-              android:layout_height="49dp"
+              android:layout_height="wrap_content"
+              android:minHeight="49dp"
               android:inputType="textMultiLine"
               android:ems="10"
               android:id="@+id/searchIngredient"
-              android:layout_weight="1.00"
+              android:layout_weight="6"
               android:textColor="#fe000000"/>
 
     <ImageButton android:id="@+id/searchRowRemove"
@@ -20,5 +21,6 @@
                  android:contentDescription="@string/btnRemove"
                  android:src="@android:drawable/ic_delete"
                  android:background="@android:color/transparent"
-                 android:padding="10dp"/>
+                 android:padding="10dp"
+                 android:layout_weight="1"/>
 </LinearLayout>

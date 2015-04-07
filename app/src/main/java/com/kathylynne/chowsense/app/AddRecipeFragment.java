@@ -131,11 +131,11 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
             image = Bitmap.createScaledBitmap(image, maxWidth, maxHeight, true);
 
         } catch (Exception ex) {
-            if (output.exists() || output != null) {
-                output.delete();
-            }
             Toast.makeText(getActivity(), "Photo not taken!", Toast.LENGTH_SHORT).show();
             image = null;
+            if (output.exists()) {
+                output.delete();
+            }
         }
 
         return image;
@@ -148,12 +148,12 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         if (output != null) {
             photo = formatImage(output.getPath(), 1024, 600);
             Log.i(Tag, "output is not null: " + output.getPath());
+            if (photo != null) {
+                photoView.setImageBitmap(photo);
+                Log.i(Tag, "photo is not null, should have decoded");
+            }
         } else {
             Log.i(Tag, "output is null");
-        }
-        if (photo != null) {
-            photoView.setImageBitmap(photo);
-            Log.i(Tag, "photo is not null, should have decoded");
         }
     }
 

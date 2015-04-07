@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fe19541c"
+                android:id="@+id/doge_layout"
+                android:clickable="true"
+                tools:context="com.kathylynne.chowsense.app.SettingsFragment">
+
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/doge_settings"
+            android:src="@drawable/dogegear" android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:text="@string/doge1"
+            android:id="@+id/dogeText4"
+            android:clickable="true"
+            android:layout_marginBottom="32dp" android:layout_above="@+id/dogeText3"
+            android:layout_toLeftOf="@+id/dogeText1" android:layout_toStartOf="@+id/dogeText1"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:text="@string/doge2"
+            android:id="@+id/dogeText3"
+            android:clickable="true"
+            android:layout_above="@+id/doge_settings" android:layout_alignRight="@+id/doge_settings"
+            android:layout_alignEnd="@+id/doge_settings" android:layout_marginBottom="35dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/white"
+            android:text="@string/doge3"
+            android:id="@+id/dogeText2"
+            android:clickable="true"
+            android:layout_below="@+id/doge_settings" android:layout_alignLeft="@+id/doge_settings"
+            android:layout_alignStart="@+id/doge_settings"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textColor="@android:color/white"
+            android:text="@string/doge4"
+            android:id="@+id/dogeText1"
+            android:clickable="true"
+            android:layout_below="@+id/dogeText2" android:layout_alignLeft="@+id/dogeText3"
+            android:layout_alignStart="@+id/dogeText3" android:layout_marginTop="38dp"/>
+</RelativeLayout>

@@ -120,6 +120,7 @@ public class DrawerActivity extends ActionBarActivity {
         // switch/case to handle action bar actions click ONLY
         switch (item.getItemId()) {
             case R.id.action_settings:
+                displayView(6);
                 return true;
 
             case R.id.action_bar_search:
@@ -272,6 +273,10 @@ public class DrawerActivity extends ActionBarActivity {
                 break;
             case 5:
                 fragment = new AboutFragment();
+                stackName = "Menu";
+                break;
+            case 6:
+                fragment = new SettingsFragment();
                 stackName = "Menu";
                 break;
 
