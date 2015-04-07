@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.kathylynne.chowsense.app.model.Favorites;
 import com.parse.*;
 
 /**
@@ -55,7 +56,9 @@ public class RegisterActivity extends ActionBarActivity{
                         if (e == null) {
 
                             Toast.makeText(context, "Registration Success!", Toast.LENGTH_SHORT).show();
+
                             loginNewUser();
+
                         } else {
                             // Sign up didn't succeed. Look at the ParseException to figure out what went wrong
                             Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
@@ -83,6 +86,10 @@ public class RegisterActivity extends ActionBarActivity{
                     ParseUser userLog = user;
                     userName = userLog.getUsername();
                     // Hooray! The user is logged in.
+                    Favorites f = new Favorites();
+                    f.setUserId();
+                    f.saveInBackground();
+                    Toast.makeText(getApplicationContext(), "FAVOURITES" + f.getUserId() + " ", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "Welcome " + userName + "!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Signup failed. Look at the ParseException to see what happened.

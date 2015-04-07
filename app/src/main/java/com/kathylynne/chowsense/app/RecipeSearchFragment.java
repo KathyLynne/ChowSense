@@ -43,13 +43,14 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
             mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
 
-
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         addSearchTerm(getActivity(), addIngredient);
+        addIngredient.performClick();
     }
 
     @Override
@@ -58,7 +59,6 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         layout = (RelativeLayout) inflater.inflate(R.layout.fragment_recipe_search, container, false);
         addIngredient = (ImageButton) layout.findViewById(R.id.addSearchTerm);
-
         searchButton = (Button) layout.findViewById(R.id.findRecipesButton);
         search = new ArrayList<String>();
         searchButton.setOnClickListener(this);

@@ -38,6 +38,11 @@
     <string name="search_btn_text">Make Chowsense!</string>
     <string name="favorites_false">Add to Favorites</string>
     <string name="favorites_true">Remove from Favorites</string>
+    <string name="doge1">much settings</string>
+    <string name="doge2">such customization</string>
+    <string name="doge3">very options</string>
+    <string name="doge4">wow</string>
+    <string name="no_results">Oh no! We couldn\'t find what you were looking for!</string>
     <string name="about_us">Chowsense is for those moments when you just do not know what to cook with what you have
         got.
 
@@ -65,6 +70,7 @@
         <item>Favourites</item>
         <item>My Recipes</item>
         <item>About</item>
+        <item>Settings</item>
 
     </string-array>
 
@@ -77,6 +83,7 @@
         <item>@android:drawable/star_off</item>
         <item>@android:drawable/ic_menu_view</item>
         <item>@android:drawable/ic_menu_info_details</item>
+        <item>@android:drawable/ic_menu_preferences</item>
     </array>
 
     <!-- Measurement Spinner Array -->

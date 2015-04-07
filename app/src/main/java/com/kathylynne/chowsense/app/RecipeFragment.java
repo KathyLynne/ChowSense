@@ -25,6 +25,7 @@ public class RecipeFragment extends ListFragment {
     public static final String SEARCH_INGREDIENT_PARAM = "Ingredients";
 
     private String userName;
+
     private String favourites;
     private ArrayList<String> ingredientSearchItems;
 
@@ -97,9 +98,11 @@ public class RecipeFragment extends ListFragment {
         } else if (favourites != null) {
             adapter = new UserFavouritesListAdapter(getActivity());
         }
-
+        adapter.getCount();
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         mListView.setAdapter(adapter);
+        // mListView.getCount();
+        //mListView.removeViewAt();
         return view;
     }
 

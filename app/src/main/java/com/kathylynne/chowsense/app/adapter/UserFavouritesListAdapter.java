@@ -18,7 +18,7 @@ import java.util.Collection;
  */
 public class UserFavouritesListAdapter extends ParseQueryAdapter {
 
-    public static ArrayList<ParseObject> userFavouritesArray = new ArrayList<ParseObject>();
+    public static ArrayList<ParseObject> userFavouritesArray;
     private static final String TAG = "Query Failure";
 
 
@@ -28,7 +28,7 @@ public class UserFavouritesListAdapter extends ParseQueryAdapter {
             public ParseQuery create() {
                 String user = ParseUser.getCurrentUser().getObjectId();
                 ParseQuery<ParseObject> query = new ParseQuery(Favorites.class);
-                ParseQuery recipeQuery = new ParseQuery(Recipe.class);
+                ParseQuery<ParseObject> recipeQuery = new ParseQuery(Recipe.class);
                 query.whereEqualTo("UserId", user);
 
                 try {
@@ -47,30 +47,51 @@ public class UserFavouritesListAdapter extends ParseQueryAdapter {
         });
     }
 
+    public static class ViewHolder {
+        TextView titleTV;
+        TextView descriptionTV;
+        ParseImageView photoIV;
+    }
+
     @Override
     public View getItemView(ParseObject object, View v, ViewGroup parent) {
+
+        ViewHolder holder;
+
         if (v == null) {
             v = View.inflate(getContext(), R.layout.layout_fragment_recipe_list, null);
+            super.getItemView(object, v, parent);
+
+            holder = new ViewHolder();
+
+            holder.titleTV = (TextView) v.findViewById(R.id.recipe_list_row_title);
+            holder.descriptionTV = (TextView) v.findViewById(R.id.recipe_list_row_Description);
+            holder.photoIV = (ParseImageView) v.findViewById(R.id.recipe_list_row_image);
+            v.setTag(holder);
+
+        } else {
+            holder = (ViewHolder) v.getTag();
         }
+        //v.setVisibility(View.VISIBLE);
 
-        super.getItemView(object, v, parent);
 
-
-        ParseImageView recipeImage = (ParseImageView) v.findViewById(R.id.recipe_list_row_image);
+        //ParseImageView recipeImage = (ParseImageView) v.findViewById(R.id.recipe_list_row_image);
         ParseFile imageFile = object.getParseFile("RecipePhoto");
         if (imageFile != null) {
-            recipeImage.setParseFile(imageFile);
-            recipeImage.loadInBackground();
+            holder.photoIV.setParseFile(imageFile);
+            holder.photoIV.loadInBackground();
         }
 
         // Add the title view
-        TextView titleTextView = (TextView) v.findViewById(R.id.recipe_list_row_title);
-        titleTextView.setText(object.getString("RecipeTitle"));
+        //TextView titleTextView = (TextView) v.findViewById(R.id.recipe_list_row_title);
+        holder.titleTV.setText(object.getString("RecipeTitle"));
 
         // Add a reminder of how long this item has been outstanding
-        TextView timestampView = (TextView) v.findViewById(R.id.recipe_list_row_Description);
-        timestampView.setText(object.getString("RecipeDescription"));
+        //TextView timestampView = (TextView) v.findViewById(R.id.recipe_list_row_Description);
+        holder.descriptionTV.setText(object.getString("RecipeDescription"));
 
         return v;
     }
+
+
 }

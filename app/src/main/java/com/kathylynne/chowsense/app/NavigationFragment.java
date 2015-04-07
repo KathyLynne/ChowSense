@@ -19,11 +19,11 @@ import com.parse.ParseUser;
 public class NavigationFragment extends Fragment implements View.OnClickListener {
 
     private RelativeLayout layout;
-    private String userName = ParseUser.getCurrentUser().getUsername().toString();
+    private String userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        userName = ParseUser.getCurrentUser().getUsername().toString();
         layout = (RelativeLayout) inflater.inflate(R.layout.fragment_navigation, container, false);
         LinearLayout searchLayout = (LinearLayout) layout.findViewById(R.id.searchImageButtonLayout);
         searchLayout.setOnClickListener(this);

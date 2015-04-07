@@ -131,11 +131,11 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
             image = Bitmap.createScaledBitmap(image, maxWidth, maxHeight, true);
 
         } catch (Exception ex) {
-            if (output.exists() || output != null) {
-                output.delete();
-            }
             Toast.makeText(getActivity(), "Photo not taken!", Toast.LENGTH_SHORT).show();
             image = null;
+            if (output.exists()) {
+                output.delete();
+            }
         }
 
         return image;
@@ -148,12 +148,13 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
         if (output != null) {
             photo = formatImage(output.getPath(), 1024, 600);
             Log.i(Tag, "output is not null: " + output.getPath());
+            if (photo != null) {
+                photoView.setImageBitmap(photo);
+                Log.i(Tag, "photo is not null, should have decoded");
+            }
         } else {
             Log.i(Tag, "output is null");
-        }
-        if (photo != null) {
-            photoView.setImageBitmap(photo);
-            Log.i(Tag, "photo is not null, should have decoded");
+
         }
     }
 
@@ -184,13 +185,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                 recipe.setSteps(steps);
                 recipe.setUser();
 
-//<<<<<<< HEAD
 
-
-//=======
-
-
-//>>>>>>> 9379b63050a2bf3f13f36aa7579d38797d4e4704
                 //save the ingredients that are present at the time of buttonClick
 
                 Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_LONG).show();
@@ -201,8 +196,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
                 //recipe.saveInBackground();
 
-                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,!?<>']", "") + ".jpg";
-
+                //String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,!?<>']", "") + ".jpg";
+                String photoName = recipe.getRecipeId() + ".jpg";
                 if (photo != null) {
 
 

@@ -16,7 +16,7 @@ public class Favorites extends ParseObject {
     }
 
     public void setUserId() {
-        put("UserId", ParseUser.getCurrentUser().getObjectId().toString());
+        put("UserId", ParseUser.getCurrentUser().getObjectId());
     }
 
     public String getUserId() {

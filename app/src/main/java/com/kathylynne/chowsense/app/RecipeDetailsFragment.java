@@ -87,12 +87,15 @@ public class RecipeDetailsFragment extends Fragment implements View.OnClickListe
         FavQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
+
                     ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
-                    for (int x = 0; x < favorites.size(); x++) {
-                        if (favorites.get(x).equals(recipeID)) {
-                            favoritesImage.setImageResource(R.drawable.favorite_true);
-                            favoritesText.setText(getText(R.string.favorites_true));
-                            break;
+                    if (favorites != null) {
+                        for (int x = 0; x < favorites.size(); x++) {
+                            if (favorites.get(x).equals(recipeID)) {
+                                favoritesImage.setImageResource(R.drawable.favorite_true);
+                                favoritesText.setText(getText(R.string.favorites_true));
+                                break;
+                            }
                         }
                     }
                 }
@@ -177,18 +180,24 @@ public class RecipeDetailsFragment extends Fragment implements View.OnClickListe
 
                         ArrayList<String> favorites = (ArrayList<String>) object.get("RecipeId");
                         boolean favorite = false;
-
-                        for (int x = 0; x < favorites.size(); x++) {
-                            if (favorites.get(x).equals(recipeID)) {
-                                favorites.remove(x);
-                                favorite = true;
-                                favoritesImage.setImageResource(R.drawable.favorite_false);
-                                favoritesText.setText(getText(R.string.favorites_false));
-                                //break;
+                        if (favorites != null) {
+                            for (int x = 0; x < favorites.size(); x++) {
+                                if (favorites.get(x).equals(recipeID)) {
+                                    favorites.remove(x);
+                                    favorite = true;
+                                    favoritesImage.setImageResource(R.drawable.favorite_false);
+                                    favoritesText.setText(getText(R.string.favorites_false));
+                                    //break;
+                                }
                             }
-                        }
 
-                        if (!favorite) {
+                            if (!favorite) {
+                                favorites.add(recipeID);
+                                favoritesImage.setImageResource(R.drawable.favorite_true);
+                                favoritesText.setText(getText(R.string.favorites_true));
+                            }
+                        } else {
+                            favorites = new ArrayList<String>();
                             favorites.add(recipeID);
                             favoritesImage.setImageResource(R.drawable.favorite_true);
                             favoritesText.setText(getText(R.string.favorites_true));

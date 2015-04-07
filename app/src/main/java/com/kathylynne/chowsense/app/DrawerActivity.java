@@ -42,6 +42,7 @@ public class DrawerActivity extends ActionBarActivity {
     private ArrayList<NavDrawerItem> navDrawerItems;
 
     private NavDrawerListAdapter adapter;
+    private String userName;
     //static Bitmap photo;
     private static final String TAG = "logging errors(On Drawer)";
 
@@ -49,8 +50,10 @@ public class DrawerActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+        userName = ParseUser.getCurrentUser().getUsername().toString();
         actionBar = getSupportActionBar();
         mTitle = mDrawerTitle = getTitle();
+
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
@@ -120,6 +123,8 @@ public class DrawerActivity extends ActionBarActivity {
         // switch/case to handle action bar actions click ONLY
         switch (item.getItemId()) {
             case R.id.action_settings:
+                displayView(6);
+
                 return true;
 
             case R.id.action_bar_search:
@@ -156,7 +161,7 @@ public class DrawerActivity extends ActionBarActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        //menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -236,7 +241,7 @@ public class DrawerActivity extends ActionBarActivity {
      */
     private void displayView(int position) {
 
-        String userName = ParseUser.getCurrentUser().get("username").toString();
+        //String userName = ParseUser.getCurrentUser().get("username").toString();
         //most efficient here, only called when needed
         // update the main content by replacing fragments
         Fragment fragment = null;
@@ -272,6 +277,10 @@ public class DrawerActivity extends ActionBarActivity {
                 break;
             case 5:
                 fragment = new AboutFragment();
+                stackName = "Menu";
+                break;
+            case 6:
+                fragment = new SettingsFragment();
                 stackName = "Menu";
                 break;
 
