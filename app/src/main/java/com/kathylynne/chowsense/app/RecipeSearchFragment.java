@@ -83,7 +83,7 @@ public class RecipeSearchFragment extends Fragment implements View.OnClickListen
                 LinearLayout innerLayout = (LinearLayout) searchLayoutForm.getChildAt(i);
                 EditText stepField = (EditText) innerLayout.findViewById(R.id.searchIngredient);
                 String stepToSave = stepField.getText().toString().trim();
-                search.add(stepToSave);
+                search.add(stepToSave.toLowerCase());
             }
 
             ft.replace(R.id.frame_container, fragment);

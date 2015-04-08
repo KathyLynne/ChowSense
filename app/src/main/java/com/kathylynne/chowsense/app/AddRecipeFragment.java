@@ -196,8 +196,8 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
 
                 //recipe.saveInBackground();
 
-                //String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,!?<>']", "") + ".jpg";
-                String photoName = recipe.getRecipeId() + ".jpg";
+                String photoName = title.getText().toString().trim().replaceAll("[\\\\-\\\\+\\\\.\\\\^:,!?<>' ]", "") + ".jpg";
+                //String photoName = recipe.getRecipeId() + ".jpg";
                 if (photo != null) {
 
 
@@ -224,7 +224,7 @@ public class AddRecipeFragment extends Fragment implements View.OnClickListener 
                                 Spinner measure = (Spinner) innerLayout.findViewById(R.id.spinner);
 
                                 String choice = measure.getSelectedItem().toString();
-                                String iName = name.getText().toString();
+                                String iName = name.getText().toString().toLowerCase();
                                 String iQty = qty.getText().toString();
                                 ingredient.setName(iName);
                                 //concatenate measure put to have the measure as well.

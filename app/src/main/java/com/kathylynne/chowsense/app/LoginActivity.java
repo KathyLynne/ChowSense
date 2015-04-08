@@ -47,7 +47,7 @@ public class LoginActivity extends ActionBarActivity {
                     userName = userLog.getObjectId();
                     // Hooray! The user is logged in.
                     Context context = getApplicationContext();
-                    Toast.makeText(context, "Hi " + userName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Hi " + userLog.getUsername().toString(), Toast.LENGTH_SHORT).show();
 
                     Intent navIntent = new Intent(LoginActivity.this, DrawerActivity.class);
                     startActivity(navIntent);

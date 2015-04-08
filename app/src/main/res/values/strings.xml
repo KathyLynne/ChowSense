@@ -53,7 +53,6 @@
         making the app, hoping you have a delicious time using it!
     </string>
 
-
     <string-array name="navigation_drawer_items_array">
         <item>Search</item>
         <item>Add Recipe</item>
@@ -71,7 +70,6 @@
         <item>My Recipes</item>
         <item>About</item>
         <item>Settings</item>
-
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -108,5 +106,6 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
 
 </resources>

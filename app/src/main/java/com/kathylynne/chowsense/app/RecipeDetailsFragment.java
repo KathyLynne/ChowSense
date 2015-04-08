@@ -138,7 +138,7 @@ public class RecipeDetailsFragment extends Fragment implements View.OnClickListe
                                     newView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                                     TextView ingredientView = (TextView) newView.findViewById(R.id.detail_recipe_text);
 
-                                    ingredientView.setText(ingredients.get(x).getMeasure() + " of " + ingredients.get(x).getName());
+                                    ingredientView.setText(ingredients.get(x).getMeasure() + " " + ingredients.get(x).getName());
                                     ingredientsLayout.addView(newView);
                                 }
                             } else {

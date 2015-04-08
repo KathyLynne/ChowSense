@@ -8,7 +8,7 @@
     <EditText
             android:layout_width="38dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:ems="10"
             android:id="@+id/qtyText" android:textColor="@color/primary_material_dark"/>
     <Spinner

@@ -28,6 +28,7 @@ public class SearchListQueryAdapter extends ParseQueryAdapter {
                 query.whereContainedIn("IngredientName", (Collection) RecipeSearchFragment.search);
                 ParseQuery recipeQuery = new ParseQuery(Recipe.class);
                 recipeQuery.whereMatchesKeyInQuery("objectId", "RecipeId", query);
+                //recipeQuery.whereContains(key, substring)
 
                 return recipeQuery;
             }

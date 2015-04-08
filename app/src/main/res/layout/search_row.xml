@@ -9,14 +9,14 @@
     <EditText android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:minHeight="49dp"
-              android:inputType="textMultiLine"
+              android:inputType="text"
               android:ems="10"
               android:id="@+id/searchIngredient"
               android:layout_weight="6"
               android:textColor="#fe000000"/>
 
     <ImageButton android:id="@+id/searchRowRemove"
-                 android:layout_width="wrap_content"
+                 android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:contentDescription="@string/btnRemove"
                  android:src="@android:drawable/ic_delete"

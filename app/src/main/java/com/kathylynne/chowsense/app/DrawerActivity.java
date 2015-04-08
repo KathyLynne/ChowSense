@@ -19,7 +19,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.kathylynne.chowsense.app.adapter.NavDrawerListAdapter;
+import com.kathylynne.chowsense.app.model.Favorites;
+import com.kathylynne.chowsense.app.model.Ingredient;
 import com.kathylynne.chowsense.app.model.NavDrawerItem;
+import com.kathylynne.chowsense.app.model.Recipe;
+import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -49,6 +54,14 @@ public class DrawerActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParseObject.registerSubclass(Ingredient.class);
+        ParseObject.registerSubclass(Recipe.class);
+        ParseObject.registerSubclass(Favorites.class);
+        ParseObject.create("Recipe");
+        ParseObject.create("Ingredient");
+        ParseObject.create("Favorites");
+        // TODO remember to check these keys on parse.
+        Parse.initialize(this, "qJwvg8qtJEb7FnzU1ygRwgdUkGp7Bgh2oV8m2yWP", "TTfQmmrAbfBFu9IGxOQb6oeSvEWLo8TliM6kgj8a");
         setContentView(R.layout.activity_drawer);
         userName = ParseUser.getCurrentUser().getUsername().toString();
         actionBar = getSupportActionBar();
