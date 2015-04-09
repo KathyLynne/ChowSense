@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import com.kathylynne.chowsense.app.adapter.BrowseQueryAdapter;
 import com.kathylynne.chowsense.app.adapter.SearchListQueryAdapter;
 import com.kathylynne.chowsense.app.adapter.UserFavouritesListAdapter;
 import com.kathylynne.chowsense.app.adapter.UserListQueryAdapter;
@@ -25,8 +26,10 @@ public class RecipeFragment extends ListFragment {
     public static final String USER_PARAM = "UserName";
     public static final String FAVOURITE_PARAM = "UserFavourites";
     public static final String SEARCH_INGREDIENT_PARAM = "Ingredients";
+    public static final String BROWSE_PARAM = "Browse";
 
     private String userName;
+    private boolean browse;
 
     private String favourites;
     private ArrayList<String> ingredientSearchItems;
@@ -48,6 +51,14 @@ public class RecipeFragment extends ListFragment {
         Bundle args = new Bundle();
         args.putString(key, parameter);
 
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static RecipeFragment newInstance(String key, Boolean value) {
+        RecipeFragment fragment = new RecipeFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(key, value);
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,7 +94,7 @@ public class RecipeFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        browse = false;
         if (getArguments() != null) {
             if (getArguments().containsKey(USER_PARAM)) {
                 userName = getArguments().getString(USER_PARAM);
@@ -91,8 +102,8 @@ public class RecipeFragment extends ListFragment {
                 favourites = getArguments().getString(FAVOURITE_PARAM);
             } else if (getArguments().containsKey(SEARCH_INGREDIENT_PARAM)) {
                 ingredientSearchItems = new ArrayList<String>(getArguments().getStringArrayList(SEARCH_INGREDIENT_PARAM));
-
-
+            } else if (getArguments().containsKey(BROWSE_PARAM)) {
+                browse = true;
             }
         }
     }
@@ -106,6 +117,8 @@ public class RecipeFragment extends ListFragment {
             adapter = new SearchListQueryAdapter(getActivity());
         } else if (favourites != null) {
             adapter = new UserFavouritesListAdapter(getActivity());
+        } else if (browse) {
+            adapter = new BrowseQueryAdapter(getActivity());
         }
         adapter.getCount();
         mListView = (AbsListView) view.findViewById(android.R.id.list);

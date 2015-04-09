@@ -78,13 +78,14 @@ public class DrawerActivity extends ActionBarActivity {
 
         //add Drawer items individually.  The matching resources found are listed in values/strings.xml but cannot be called directly form there as the
         //method is deprecated.  List left in strings for time saving in the future.
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], android.R.drawable.ic_menu_compass));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], R.drawable.ic_launcher));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], android.R.drawable.ic_menu_search));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], android.R.drawable.ic_menu_add));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], android.R.drawable.star_off));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], android.R.drawable.ic_menu_view));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], android.R.drawable.ic_menu_info_details));
-
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], android.R.drawable.ic_menu_more));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], android.R.drawable.ic_menu_add));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], android.R.drawable.star_off));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], android.R.drawable.ic_menu_view));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], android.R.drawable.ic_menu_info_details));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], android.R.drawable.ic_menu_manage));
 
         //begin click functionality in drawer
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -274,25 +275,29 @@ public class DrawerActivity extends ActionBarActivity {
                 stackName = "Menu";
                 break;
             case 2:
+                fragment = RecipeFragment.newInstance(RecipeFragment.BROWSE_PARAM, true);
+                stackName = "Menu";
+                break;
+            case 3:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 stackName = "Menu";
                 fragment = new AddRecipeFragment();
                 break;
-            case 3:
+            case 4:
                 //String userName = ParseUser.getCurrentUser().get("username").toString();
                 fragment = RecipeFragment.newInstance(RecipeFragment.FAVOURITE_PARAM, userName);
                 stackName = "Menu";
                 break;
-            case 4:
+            case 5:
                 // fragment = new PagesFragment();
                 fragment = RecipeFragment.newInstance(RecipeFragment.USER_PARAM, userName);
                 stackName = "Menu";
                 break;
-            case 5:
+            case 6:
                 fragment = new AboutFragment();
                 stackName = "Menu";
                 break;
-            case 6:
+            case 7:
                 fragment = new SettingsFragment();
                 stackName = "Menu";
                 break;
